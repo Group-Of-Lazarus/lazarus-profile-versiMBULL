@@ -1,8 +1,7 @@
 # LAZARUS — Template Website Komunitas
 
 Clone struktur & animasi dari AOS, dibangun ulang dengan **React + Vite +
-Tailwind CSS v4 + Framer Motion**. Gunakan ini sebagai starter untuk website
-komunitas kamu sendiri — tinggal ganti nama, warna, data, dan foto.
+Tailwind CSS v4 + Framer Motion**.
 
 ## Stack
 
@@ -65,17 +64,3 @@ npm run preview   # preview hasil build
 6. **Kontak & sosial media** — edit array `platforms` di `Contact.jsx`.
 7. **Form pendaftaran** — `Pendaftaran.jsx` saat ini hanya simulasi submit di
    frontend. Sambungkan ke backend/Google Form/Supabase sesuai kebutuhan.
-
-## Animasi
-
-Semua animasi scroll-reveal pakai komponen `<Reveal>` (Framer Motion,
-`whileInView`), jadi konsisten di seluruh halaman dan otomatis menghormati
-preferensi "reduced motion" pengguna. Halaman detail aktivitas & struktur
-organisasi juga punya transisi tab (`AnimatePresence`) mirip web aslinya.
-
-## Catatan
-
-Ini adalah kloning **tampilan & struktur** untuk keperluan belajar / dasar
-project komunitas kamu sendiri — bukan salinan 1:1 dari kode sumber asli
-(yang tidak publik). Semua data organisasi & aktivitas di folder `data/`
-adalah contoh yang perlu kamu sesuaikan dengan data komunitasmu sendiri.
