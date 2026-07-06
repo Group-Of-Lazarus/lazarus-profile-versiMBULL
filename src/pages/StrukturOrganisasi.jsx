@@ -103,19 +103,19 @@ export default function StrukturOrganisasi() {
             >
               <p className="text-sm text-slate-500 mb-8">{active.namaLengkap}</p>
 
-              {/* Kepala + Sekretaris Departemen, menyebar kiri-kanan */}
-              <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-8 sm:gap-4 mb-14 max-w-3xl">
+              {/* Kepala + Sekretaris Departemen, menyebar kiri-kanan, simetris di tengah */}
+                <div className="flex flex-col sm:flex-row sm:justify-around items-center gap-8 sm:gap-4 mb-14 max-w-3xl mx-auto">
                 <div className="w-40">
-                  <Reveal once={false}>
+                    <Reveal once={false}>
                     <TeamCard {...active.ketua} jabatan="Kepala Departemen" />
-                  </Reveal>
+                    </Reveal>
                 </div>
                 <div className="w-40">
-                  <Reveal once={false} delay={0.1}>
+                    <Reveal once={false} delay={0.1}>
                     <TeamCard {...active.sekretaris} jabatan="Sekretaris Departemen" />
-                  </Reveal>
+                    </Reveal>
                 </div>
-              </div>
+                </div>
 
               {/* Anggota */}
               <div className="flex items-center gap-2 mb-4">
