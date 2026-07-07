@@ -1,27 +1,49 @@
 import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
+import {
+  HeartHandshake,
+  Megaphone,
+  Network,
+  Settings,
+  Store,
+  Trophy,
+  Users,
+} from "lucide-react";
 
-const culture = [
+const departments = [
   {
-    no: "01",
-    emoji: "😎",
-    id: "Santai Namun Tegas",
-    en: "RELAXED YET FIRM",
-    desc: "Membangun lingkungan kerja yang enjoy, namun tetap memegang teguh profesionalisme dan ketegasan dalam tanggung jawab.",
+    name: "PAO",
+    icon: Settings,
+    desc: "Departemen PAO bertanggung jawab dalam pengembangan aparatur organisasi, kaderisasi, peningkatan kapasitas pengurus, serta menjaga tata kelola organisasi agar berjalan efektif dan terarah.",
   },
   {
-    no: "02",
-    emoji: "📋",
-    id: "Berlandaskan Aturan Jelas",
-    en: "CLEAR GUIDELINES",
-    desc: "Setiap langkah organisasi dipandu oleh aturan main yang terstruktur rapi, menjadi pondasi kuat untuk menghindari grey area dalam bekerja.",
+    name: "Internal",
+    icon: Users,
+    desc: "Departemen Internal berperan menjaga keharmonisan pengurus dan anggota, menguatkan komunikasi internal, serta menciptakan lingkungan organisasi yang solid, nyaman, dan produktif.",
   },
   {
-    no: "03",
-    emoji: "🤝",
-    id: "Solidaritas yang Solutif",
-    en: "BONDING FOR IMPACT",
-    desc: "Kedekatan antar pengurus bukan cuma buat nongkrong, tapi jadi kunci kolaborasi efektif dan penyelesaian masalah internal yang cepat.",
+    name: "Eksternal",
+    icon: Network,
+    desc: "Departemen Eksternal bertanggung jawab membangun relasi, kolaborasi, dan komunikasi dengan pihak luar organisasi untuk memperluas jaringan serta peluang kerja sama HMPS.",
+  },
+  {
+    name: "Kominfo",
+    icon: Megaphone,
+    desc: "Departemen Kominfo mengelola arus informasi, publikasi, dokumentasi, dan media organisasi agar setiap program kerja dapat tersampaikan secara informatif, kreatif, dan tepat sasaran.",
+  },
+  {
+    name: "Minat & Bakat",
+    icon: Trophy,
+    desc: "Departemen Minat & Bakat menjadi wadah pengembangan potensi mahasiswa di bidang akademik maupun non-akademik melalui program yang mendukung kreativitas, prestasi, dan aktualisasi diri.",
+  },
+  {
+    name: "Pemberdayaan Perempuan",
+    icon: HeartHandshake,
+    desc: "Departemen Pemberdayaan Perempuan berfokus pada penguatan peran, ruang aman, edukasi, dan advokasi bagi mahasiswi agar dapat berkembang aktif dalam lingkungan kampus dan organisasi.",
+  },
+  {
+    name: "Ekonomi Kreatif",
+    icon: Store,
+    desc: "Departemen Ekonomi Kreatif bertanggung jawab mengembangkan ide kewirausahaan, pengelolaan usaha kreatif, serta peluang pendanaan mandiri untuk mendukung keberlanjutan program organisasi.",
   },
 ];
 
@@ -29,33 +51,41 @@ export default function Culture() {
   return (
     <section className="container-hmps py-24 md:py-28">
       <Reveal>
-        <Eyebrow>BUDAYA ORGANISASI</Eyebrow>
-        <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-14 text-slate-900">
-          Culture <span className="text-blue-600">Organisasi</span> Kami
-        </h2>
+        <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
+          <p className="font-display font-bold text-lg text-slate-900 mb-3">
+            Departemen HMPS Informatika
+          </p>
+          <h2 className="font-display font-extrabold text-3xl md:text-5xl leading-tight text-blue-600">
+            Penjelasan Tugas dan Fungsi Setiap Departemen di HMPS Informatika
+          </h2>
+        </div>
       </Reveal>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {culture.map((c, i) => (
-          <Reveal key={c.no} delay={i * 0.12}>
-            <div className="bg-white border border-slate-100 rounded-3xl p-8 h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative">
-              <span className="absolute top-6 right-7 text-4xl font-display font-extrabold text-slate-100">
-                {c.no}
-              </span>
-              <div className="w-12 h-12 rounded-xl bg-blue-50 grid place-items-center text-2xl mb-6">
-                {c.emoji}
+      <div className="grid gap-x-16 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+        {departments.map((department, i) => (
+          <Reveal key={department.name} delay={i * 0.08}>
+            <article className="h-full">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-14 h-14 rounded-full bg-blue-600 text-white grid place-items-center shrink-0">
+                  <department.icon size={27} strokeWidth={2.5} />
+                </span>
+                <h3 className="font-display font-extrabold text-2xl md:text-3xl text-slate-950">
+                  {department.name}
+                </h3>
               </div>
-              <h3 className="font-display font-bold text-lg text-slate-900 mb-1">
-                {c.id}
-              </h3>
-              <p className="text-[11px] font-semibold tracking-wider text-blue-600 mb-4">
-                {c.en}
+              <p className="text-base md:text-lg text-slate-800 leading-relaxed">
+                {department.desc}
               </p>
-              <p className="text-sm text-slate-600 leading-relaxed">{c.desc}</p>
-            </div>
+            </article>
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={0.56}>
+        <p className="text-center text-sm text-slate-500 mt-16">
+          Ngahiji, Ngajaga Informatika.
+        </p>
+      </Reveal>
     </section>
   );
 }

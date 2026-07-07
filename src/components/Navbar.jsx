@@ -66,7 +66,7 @@ export default function Navbar() {
             className="h-10 w-10 object-contain"
           />
           <span className="font-display font-extrabold text-lg tracking-tight text-slate-900">
-            LAZARUS
+            HMPS Informatika
           </span>
         </Link>
 
