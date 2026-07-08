@@ -63,7 +63,7 @@ export default function Navbar() {
           <img
             src="/logo_hmps.png"
             alt="Logo HMPS"
-            className="h-10 w-10 object-contain"
+            className="h-15 w-15 object-contain"
           />
           <span className="font-display font-extrabold text-lg tracking-tight text-slate-900">
             HMPS Informatika

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShieldCheck, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "./BrandIcons";
 
 export default function Footer() {
@@ -8,10 +8,12 @@ export default function Footer() {
       <div className="container-hmps py-16 grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-9 h-9 rounded-full bg-blue-600 text-white grid place-items-center">
-              <ShieldCheck size={18} />
-            </span>
-            <span className="font-display font-extrabold text-lg text-white">LAZARUS</span>
+            <img
+              src="/logo_hmps.png"
+              alt="Logo HMPS"
+              className="h-15 w-15 object-contain"
+            />
+            <span className="font-display font-extrabold text-lg text-white">HMPS INFORMATIKA</span>
           </div>
           <p className="text-sm leading-relaxed max-w-xs text-slate-400">
             Himpunan Mahasiswa Informatika Universitas Islam Negeri Sultan Maulana Hasanuddin Banten.
