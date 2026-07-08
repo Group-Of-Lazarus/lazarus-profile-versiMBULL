@@ -17,10 +17,10 @@ export default function Galeri() {
       <div className="container-hmps">
         <Reveal>
           <Eyebrow>DOKUMENTASI</Eyebrow>
-          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-slate-900">
-            Galeri <span className="text-blue-600">Kegiatan</span>
+          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
+            Galeri <span className="text-[var(--brand-text)]">Kegiatan</span>
           </h1>
-          <p className="text-slate-600 max-w-lg mb-14">
+          <p className="text-[var(--text-secondary)] max-w-lg mb-14">
             Momen-momen terbaik dari berbagai kegiatan yang telah HMPS INF
             selenggarakan.
           </p>
@@ -34,7 +34,7 @@ export default function Galeri() {
                 className="w-full block break-inside-avoid rounded-2xl overflow-hidden group relative"
                 style={{ aspectRatio: i % 3 === 0 ? "3/4" : "4/3" }}
               >
-                <div className="w-full h-full bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400 group-hover:scale-105 transition-transform duration-300" />
+                <div className="w-full h-full bg-gradient-to-br from-violet-700 via-violet-500 to-fuchsia-400 group-hover:scale-105 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/30 transition-colors flex items-end p-4 opacity-0 group-hover:opacity-100">
                   <p className="text-white text-xs font-medium text-left">{p.caption}</p>
                 </div>
@@ -57,13 +57,13 @@ export default function Galeri() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl overflow-hidden max-w-lg w-full"
+              className="bg-[var(--surface)] rounded-2xl overflow-hidden max-w-lg w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-video bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400" />
+              <div className="aspect-video bg-gradient-to-br from-violet-700 via-violet-500 to-fuchsia-400" />
               <div className="p-5 flex items-center justify-between">
-                <p className="text-sm font-medium text-slate-700">{selected.caption}</p>
-                <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-700">
+                <p className="text-sm font-medium text-[var(--text-secondary)]">{selected.caption}</p>
+                <button onClick={() => setSelected(null)} className="text-[var(--text-faint)] hover:text-[var(--text-secondary)]">
                   <X size={18} />
                 </button>
               </div>

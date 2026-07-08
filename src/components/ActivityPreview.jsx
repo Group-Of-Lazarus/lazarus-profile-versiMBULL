@@ -14,22 +14,22 @@ export default function ActivityPreview() {
       : aktivitasList.filter((a) => a.status === active);
 
   return (
-    <section className="bg-slate-50 py-24 md:py-28">
+    <section className="bg-[var(--surface-alt)] py-24 md:py-28">
       <div className="container-hmps">
         <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <Eyebrow>AGENDA TERBARU</Eyebrow>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-slate-900">
-              Aktivitas <span className="text-blue-600">Terbaru</span>
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
+              Aktivitas <span className="text-[var(--brand-text)]">Terbaru</span>
             </h2>
-            <p className="text-slate-600 max-w-lg">
+            <p className="text-[var(--text-secondary)] max-w-lg">
               Ikuti berbagai kegiatan menarik kami. Gunakan filter atau cari
               aktivitas spesifik yang ingin kamu ikuti.
             </p>
           </div>
           <Link
             to="/aktivitas"
-            className="shrink-0 inline-flex items-center justify-center bg-slate-900 hover:bg-blue-600 transition-colors text-white text-sm font-semibold px-6 py-3 rounded-full"
+            className="shrink-0 inline-flex items-center justify-center bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3 rounded-full"
           >
             Lihat Semua
           </Link>
@@ -42,8 +42,8 @@ export default function ActivityPreview() {
               onClick={() => setActive(f.key)}
               className={`text-sm font-medium px-5 py-2.5 rounded-full border transition-colors ${
                 active === f.key
-                  ? "bg-blue-600 border-blue-600 text-white"
-                  : "bg-white border-slate-200 text-slate-600 hover:border-blue-300"
+                  ? "bg-[var(--brand)] border-[var(--brand)] text-white"
+                  : "bg-[var(--surface)] border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--brand)]"
               }`}
             >
               {f.label}
@@ -58,7 +58,7 @@ export default function ActivityPreview() {
             </Reveal>
           ))}
           {filtered.length === 0 && (
-            <p className="text-slate-500 col-span-full text-center py-12">
+            <p className="text-[var(--text-muted)] col-span-full text-center py-12">
               Belum ada aktivitas untuk kategori ini.
             </p>
           )}

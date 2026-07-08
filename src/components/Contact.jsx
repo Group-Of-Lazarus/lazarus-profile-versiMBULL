@@ -39,17 +39,17 @@ export default function Contact() {
       <div className="grid md:grid-cols-2 gap-14 items-start">
         <Reveal>
           <Eyebrow>KONTAK KAMI</Eyebrow>
-          <h2 className="font-display font-extrabold text-5xl md:text-6xl mt-5 mb-6 leading-[1.05] text-slate-900">
+          <h2 className="font-display font-extrabold text-5xl md:text-6xl mt-5 mb-6 leading-[1.05] text-[var(--text-primary)]">
             Ayo,{" "}
-            <span className="text-blue-600 block">Terhubung</span>
+            <span className="text-[var(--brand-text)] block">Terhubung</span>
             dengan Kami.
           </h2>
-          <p className="text-slate-600 max-w-md mb-8">
+          <p className="text-[var(--text-secondary)] max-w-md mb-8">
             Terbuka untuk kolaborasi, pertanyaan, dan masukan. Temukan kami di
             berbagai platform berikut.
           </p>
-          <div className="flex items-center gap-2 text-slate-400 text-xs">
-            <span className="w-6 h-px bg-slate-300" /> 4 PLATFORM TERSEDIA
+          <div className="flex items-center gap-2 text-[var(--text-faint)] text-xs">
+            <span className="w-6 h-px bg-[var(--border)]" /> 4 PLATFORM TERSEDIA
           </div>
         </Reveal>
 
@@ -60,10 +60,10 @@ export default function Contact() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group block bg-white border border-slate-100 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
+                className="group block bg-[var(--surface)] border border-[var(--border-subtle)] rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
               >
                 <div className="flex items-start justify-between mb-8">
-                  <span className="w-12 h-12 rounded-xl bg-slate-50 ring-1 ring-slate-100 grid place-items-center">
+                  <span className="w-12 h-12 rounded-xl bg-[var(--surface-alt)] ring-1 ring-[var(--border-subtle)] grid place-items-center">
                     <img
                       src={p.icon}
                       alt={p.alt}
@@ -72,13 +72,13 @@ export default function Contact() {
                   </span>
                   <ArrowUpRight
                     size={16}
-                    className="text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                    className="text-[var(--text-faint)] group-hover:text-[var(--brand-text)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
                   />
                 </div>
-                <p className="text-[11px] font-semibold tracking-wider text-slate-400 mb-1">
+                <p className="text-[11px] font-semibold tracking-wider text-[var(--text-faint)] mb-1">
                   {p.label}
                 </p>
-                <p className="text-sm font-medium text-slate-900">{p.value}</p>
+                <p className="text-sm font-medium text-[var(--text-primary)]">{p.value}</p>
               </a>
             </Reveal>
           ))}

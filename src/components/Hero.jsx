@@ -19,7 +19,7 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="flex justify-center mb-6"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-slate-100 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-slate-100 bg-[var(--surface)]/10 border border-white/20 rounded-full px-4 py-1.5 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             UIN Sultan Maulana Hasanuddin Banten
           </span>
@@ -61,13 +61,13 @@ export default function Hero() {
         >
           <a
             href="/pendaftaran"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
+            className="inline-flex items-center gap-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
           >
             Gabung HMPS INF →
           </a>
           <a
             href="#tentang"
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full backdrop-blur-sm"
+            className="inline-flex items-center gap-2 bg-[var(--surface)]/10 hover:bg-[var(--surface)]/20 border border-white/20 transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full backdrop-blur-sm"
           >
             Tentang Kami
           </a>

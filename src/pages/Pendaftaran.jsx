@@ -16,10 +16,10 @@ export default function Pendaftaran() {
       <div className="container-hmps grid md:grid-cols-2 gap-14 items-start">
         <Reveal>
           <Eyebrow>PENDAFTARAN</Eyebrow>
-          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-slate-900">
-            Gabung <span className="text-blue-600">HMPS INF</span>
+          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
+            Gabung <span className="text-[var(--brand-text)]">HMPS INF</span>
           </h1>
-          <p className="text-slate-600 max-w-md mb-6">
+          <p className="text-[var(--text-secondary)] max-w-md mb-6">
             Jadilah bagian dari HMPS INF dan kembangkan potensi, jaringan, serta
             pengalaman organisasimu bersama kami.
           </p>
@@ -29,8 +29,8 @@ export default function Pendaftaran() {
               "Kesempatan mengikuti pelatihan & event eksklusif",
               "Membangun relasi lintas angkatan dan kampus",
             ].map((b) => (
-              <li key={b} className="flex items-start gap-3 text-sm text-slate-600">
-                <CheckCircle2 size={18} className="text-blue-600 shrink-0 mt-0.5" />
+              <li key={b} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                <CheckCircle2 size={18} className="text-[var(--brand-text)] shrink-0 mt-0.5" />
                 {b}
               </li>
             ))}
@@ -39,12 +39,12 @@ export default function Pendaftaran() {
 
         <Reveal delay={0.15}>
           {sent ? (
-            <div className="bg-blue-50 border border-blue-100 rounded-3xl p-10 text-center">
-              <CheckCircle2 size={36} className="text-blue-600 mx-auto mb-4" />
-              <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
+            <div className="bg-[var(--brand-soft)] border border-[var(--brand-ring)] rounded-3xl p-10 text-center">
+              <CheckCircle2 size={36} className="text-[var(--brand-text)] mx-auto mb-4" />
+              <h3 className="font-display font-bold text-xl text-[var(--text-primary)] mb-2">
                 Pendaftaran Terkirim!
               </h3>
-              <p className="text-slate-600 text-sm">
+              <p className="text-[var(--text-secondary)] text-sm">
                 Terima kasih sudah mendaftar. Tim HMPS INF akan menghubungimu
                 lewat email atau WhatsApp.
               </p>
@@ -52,7 +52,7 @@ export default function Pendaftaran() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="bg-white border border-slate-100 rounded-3xl p-8 space-y-5"
+              className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-3xl p-8 space-y-5"
             >
               {[
                 { label: "Nama Lengkap", type: "text", placeholder: "Masukkan nama lengkap" },
@@ -61,31 +61,31 @@ export default function Pendaftaran() {
                 { label: "No. WhatsApp", type: "tel", placeholder: "08xxxxxxxxxx" },
               ].map((f) => (
                 <div key={f.label}>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                     {f.label}
                   </label>
                   <input
                     required
                     type={f.type}
                     placeholder={f.placeholder}
-                    className="w-full text-sm border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
+                    className="w-full text-sm border border-[var(--border)] rounded-xl px-4 py-3 outline-none focus:border-[var(--brand)] focus:ring-2 focus:ring-[var(--brand-ring)] transition-all"
                   />
                 </div>
               ))}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                   Motivasi Bergabung
                 </label>
                 <textarea
                   required
                   rows={4}
                   placeholder="Ceritakan alasanmu ingin bergabung..."
-                  className="w-full text-sm border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all resize-none"
+                  className="w-full text-sm border border-[var(--border)] rounded-xl px-4 py-3 outline-none focus:border-[var(--brand)] focus:ring-2 focus:ring-[var(--brand-ring)] transition-all resize-none"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-500 transition-colors text-white text-sm font-semibold py-3.5 rounded-xl"
+                className="w-full bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold py-3.5 rounded-xl"
               >
                 Kirim Pendaftaran
               </button>

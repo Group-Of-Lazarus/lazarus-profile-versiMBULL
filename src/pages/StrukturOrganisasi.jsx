@@ -26,10 +26,10 @@ export default function StrukturOrganisasi() {
       <div className="container-hmps">
         <Reveal>
           <Eyebrow>MASA KHIDMAT 2026</Eyebrow>
-          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-slate-900">
-            Struktur <span className="text-blue-600">Organisasi</span>
+          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
+            Struktur <span className="text-[var(--brand-text)]">Organisasi</span>
           </h1>
-          <p className="text-slate-600 max-w-lg mb-14">
+          <p className="text-[var(--text-secondary)] max-w-lg mb-14">
             Sinergi dalam harmoni — HMPS Informatika yang adaptif dan kreatif.
           </p>
         </Reveal>
@@ -37,8 +37,8 @@ export default function StrukturOrganisasi() {
         {/* Badan Pengurus Harian — layout tree/org-chart */}
         <div className="mb-20">
           <div className="flex items-center gap-2 mb-10">
-            <Star size={16} className="text-blue-600" />
-            <h2 className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            <Star size={16} className="text-[var(--brand-text)]" />
+            <h2 className="text-xs font-semibold tracking-wider text-[var(--text-muted)] uppercase">
               Badan Pengurus Harian
             </h2>
           </div>
@@ -55,10 +55,10 @@ export default function StrukturOrganisasi() {
 
             {/* Connector lines — desktop only */}
             <div className="hidden md:block relative h-12">
-              <div className="absolute left-1/2 top-0 w-px h-6 bg-slate-300 -translate-x-1/2" />
-              <div className="absolute left-[22%] right-[22%] top-6 h-px bg-slate-300" />
-              <div className="absolute left-[22%] top-6 w-px h-6 bg-slate-300" />
-              <div className="absolute right-[22%] top-6 w-px h-6 bg-slate-300" />
+              <div className="absolute left-1/2 top-0 w-px h-6 bg-[var(--border)] -translate-x-1/2" />
+              <div className="absolute left-[22%] right-[22%] top-6 h-px bg-[var(--border)]" />
+              <div className="absolute left-[22%] top-6 w-px h-6 bg-[var(--border)]" />
+              <div className="absolute right-[22%] top-6 w-px h-6 bg-[var(--border)]" />
             </div>
             {/* Mobile spacer */}
             <div className="h-8 md:hidden" />
@@ -82,8 +82,8 @@ export default function StrukturOrganisasi() {
         {/* Departemen */}
         <Reveal once={false}>
           <div className="flex items-center gap-2 mb-5">
-            <Building2 size={16} className="text-blue-600" />
-            <h2 className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            <Building2 size={16} className="text-[var(--brand-text)]" />
+            <h2 className="text-xs font-semibold tracking-wider text-[var(--text-muted)] uppercase">
               Departemen
             </h2>
           </div>
@@ -95,8 +95,8 @@ export default function StrukturOrganisasi() {
                 onClick={() => setTab(d.slug)}
                 className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors ${
                   tab === d.slug
-                    ? "bg-slate-900 text-white"
-                    : "bg-white border border-slate-200 text-slate-600 hover:border-blue-300"
+                    ? "bg-[var(--brand)] text-white"
+                    : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--brand)]"
                 }`}
               >
                 {d.nama}
@@ -112,7 +112,7 @@ export default function StrukturOrganisasi() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-sm text-slate-500 mb-8">{active.namaLengkap}</p>
+              <p className="text-sm text-[var(--text-muted)] mb-8">{active.namaLengkap}</p>
 
               {/* Kepala + Sekretaris Departemen, menyebar kiri-kanan, simetris di tengah */}
               <div className="flex flex-col sm:flex-row sm:justify-around items-center gap-8 sm:gap-4 mb-14 max-w-3xl mx-auto">
@@ -130,8 +130,8 @@ export default function StrukturOrganisasi() {
 
               {/* Anggota */}
               <div className="flex items-center gap-2 mb-4">
-                <Users size={14} className="text-slate-400" />
-                <p className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
+                <Users size={14} className="text-[var(--text-faint)]" />
+                <p className="text-xs font-semibold tracking-wider text-[var(--text-faint)] uppercase">
                   Anggota
                 </p>
               </div>

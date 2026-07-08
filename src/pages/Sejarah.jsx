@@ -14,22 +14,22 @@ export default function Sejarah() {
       <div className="container-hmps">
         <Reveal>
           <Eyebrow>PERJALANAN KAMI</Eyebrow>
-          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-slate-900">
-            Sejarah <span className="text-blue-600">HMPS INF</span>
+          <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
+            Sejarah <span className="text-[var(--brand-text)]">HMPS INF</span>
           </h1>
-          <p className="text-slate-600 max-w-lg mb-14">
+          <p className="text-[var(--text-secondary)] max-w-lg mb-14">
             Jejak langkah HMPS INF dari masa ke masa dalam membangun ekosistem
             mahasiswa Informatika yang berdaya.
           </p>
         </Reveal>
 
-        <div className="relative pl-8 border-l-2 border-slate-100 space-y-12 max-w-2xl">
+        <div className="relative pl-8 border-l-2 border-[var(--border-subtle)] space-y-12 max-w-2xl">
           {timeline.map((t, i) => (
             <Reveal key={t.tahun} delay={i * 0.1} className="relative">
-              <span className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-blue-600 border-4 border-white ring-1 ring-slate-100" />
-              <p className="text-blue-600 font-bold text-sm mb-1">{t.tahun}</p>
-              <h3 className="font-display font-bold text-xl text-slate-900 mb-2">{t.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{t.desc}</p>
+              <span className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-[var(--brand)] border-4 border-white ring-1 ring-[var(--border-subtle)]" />
+              <p className="text-[var(--brand-text)] font-bold text-sm mb-1">{t.tahun}</p>
+              <h3 className="font-display font-bold text-xl text-[var(--text-primary)] mb-2">{t.title}</h3>
+              <p className="text-[var(--text-secondary)] leading-relaxed">{t.desc}</p>
             </Reveal>
           ))}
         </div>

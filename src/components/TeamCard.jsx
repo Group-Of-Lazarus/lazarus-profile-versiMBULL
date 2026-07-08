@@ -15,10 +15,10 @@ export default function TeamCard({ nama, nim, jabatan, foto, size = "lg" }) {
   const isSmall = size === "sm";
 
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+    <div className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
       {/* Photo area: blue background + decorative rings, generated in CSS/SVG */}
       <div
-        className={`relative overflow-hidden bg-blue-600 ${
+        className={`relative overflow-hidden bg-[var(--brand)] ${
           isSmall ? "aspect-square" : "aspect-[4/5]"
         }`}
       >
@@ -51,13 +51,13 @@ export default function TeamCard({ nama, nim, jabatan, foto, size = "lg" }) {
 
       {/* Name + role */}
       <div className={`text-center ${isSmall ? "p-3" : "p-4"}`}>
-        <p className={`font-semibold text-blue-600 ${isSmall ? "text-sm" : "text-base"}`}>
+        <p className={`font-semibold text-[var(--brand-text)] ${isSmall ? "text-sm" : "text-base"}`}>
           {nama}
         </p>
         {jabatan && (
-          <p className="text-xs text-slate-500 mt-0.5 leading-snug">{jabatan}</p>
+          <p className="text-xs text-[var(--text-muted)] mt-0.5 leading-snug">{jabatan}</p>
         )}
-        <p className="text-[11px] text-slate-400 mt-1">NIM · {nim}</p>
+        <p className="text-[11px] text-[var(--text-faint)] mt-1">NIM · {nim}</p>
       </div>
     </div>
   );

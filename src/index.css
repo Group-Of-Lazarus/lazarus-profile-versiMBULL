@@ -1,11 +1,66 @@
 @import "tailwindcss";
 
+/* Aktifkan dark mode berbasis class ".dark" di <html>, bukan cuma prefers-color-scheme,
+   supaya bisa di-toggle manual lewat tombol (bukan ngikut setting OS doang). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-brand-blue: #2563eb;
-  --color-brand-blue-dark: #1d4ed8;
-  --color-ink: #0f172a;
   --font-display: "Manrope", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
+
+  /* Skala Electric Violet — dipakai lewat class bg-violet-*, text-violet-*, dst */
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6fe;
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #6d28d9;
+  --color-violet-800: #5b21b6;
+  --color-violet-900: #4c1d95;
+  --color-violet-950: #2e1065;
+}
+
+:root {
+  /* Token semantik light mode — dipakai lewat bg-[var(--surface)] dkk */
+  --page: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --surface-alt-2: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --border-subtle: #f1f5f9;
+  --border: #e2e8f0;
+
+  --brand: var(--color-violet-600);
+  --brand-hover: var(--color-violet-700);
+  --brand-text: var(--color-violet-600);
+  --brand-soft: var(--color-violet-50);
+  --brand-soft-text: var(--color-violet-700);
+  --brand-ring: var(--color-violet-100);
+}
+
+.dark {
+  --page: #0b0a12;
+  --surface: #15121f;
+  --surface-alt: #1b1729;
+  --surface-alt-2: #211c32;
+  --text-primary: #f4f2fa;
+  --text-secondary: #b8b3c9;
+  --text-muted: #8d87a3;
+  --text-faint: #6b6683;
+  --border-subtle: #221e33;
+  --border: #2c2740;
+
+  --brand: var(--color-violet-500);
+  --brand-hover: var(--color-violet-400);
+  --brand-text: var(--color-violet-400);
+  --brand-soft: rgba(139, 92, 246, 0.12);
+  --brand-soft-text: var(--color-violet-300);
+  --brand-ring: rgba(139, 92, 246, 0.25);
 }
 
 html {
@@ -14,8 +69,9 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: #0f172a;
-  background: #ffffff;
+  color: var(--text-primary);
+  background: var(--page);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, h4 {
@@ -23,7 +79,7 @@ h1, h2, h3, h4 {
 }
 
 ::selection {
-  background: #2563eb;
+  background: var(--brand);
   color: white;
 }
 

@@ -11,9 +11,9 @@ export default function ActivityCard({ item, index = 0 }) {
   return (
     <Link
       to={`/aktivitas/${item.slug}`}
-      className="group block bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="group block bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border-subtle)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[16/11] bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500 overflow-hidden">
+      <div className="relative aspect-[16/11] bg-gradient-to-br from-violet-700 via-violet-600 to-fuchsia-500 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white,transparent_40%)]" />
         <span
           className={`absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${statusStyle[item.status]}`}
@@ -34,14 +34,14 @@ export default function ActivityCard({ item, index = 0 }) {
       </div>
 
       <div className="p-6">
-        <h3 className="font-display font-bold text-lg text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-2 group-hover:text-[var(--brand-text)] transition-colors">
           {item.judul}
         </h3>
-        <p className="text-sm text-slate-500 leading-relaxed line-clamp-3 mb-4">
+        <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-3 mb-4">
           {item.ringkas}
         </p>
-        <div className="flex items-center gap-3 flex-wrap text-xs font-medium text-slate-500">
-          <span className="inline-flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-full">
+        <div className="flex items-center gap-3 flex-wrap text-xs font-medium text-[var(--text-muted)]">
+          <span className="inline-flex items-center gap-1.5 bg-[var(--surface-alt)] px-3 py-1.5 rounded-full">
             <Calendar size={13} />
             {new Date(item.tanggalMulai).toLocaleDateString("id-ID", {
               day: "numeric",

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X, ShieldCheck, MessageSquare, Heart } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -55,7 +56,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-white"
+        scrolled ? "bg-[var(--surface)]/90 backdrop-blur-md shadow-sm" : "bg-[var(--surface)]"
       }`}
     >
       <nav className="container-hmps flex items-center justify-between h-[76px]">
@@ -65,7 +66,7 @@ export default function Navbar() {
             alt="Logo HMPS"
             className="h-15 w-15 object-contain"
           />
-          <span className="font-display font-extrabold text-lg tracking-tight text-slate-900">
+          <span className="font-display font-extrabold text-lg tracking-tight text-[var(--text-primary)]">
             HMPS Informatika
           </span>
         </Link>
@@ -76,8 +77,8 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                location.pathname === link.to ? "text-slate-900" : "text-slate-600"
+              className={`text-sm font-medium transition-colors hover:text-[var(--brand-text)] ${
+                location.pathname === link.to ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
               }`}
             >
               {link.label}
@@ -89,7 +90,7 @@ export default function Navbar() {
             onMouseEnter={() => setAspirasiOpen(true)}
             onMouseLeave={() => setAspirasiOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+            <button className="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] transition-colors">
               Aspirasi
               <ChevronDown
                 size={15}
@@ -103,31 +104,31 @@ export default function Navbar() {
                   : "opacity-0 scale-95 pointer-events-none"
               }`}
             >
-              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-5 flex gap-8 w-[380px]">
+              <div className="bg-[var(--surface)] rounded-2xl shadow-lg border border-[var(--border-subtle)] p-5 flex gap-8 w-[380px]">
                 {aspirasiGroups.map((group) => (
                   <div key={group.heading} className="flex-1">
-                    <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase mb-3">
+                    <p className="text-[10px] font-semibold tracking-wider text-[var(--text-faint)] uppercase mb-3">
                       {group.heading}
                     </p>
                     <div className="space-y-1">
                       {group.items.map((item) => {
                         const inner = (
                           <>
-                            <span className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 grid place-items-center shrink-0 group-hover:bg-white transition-colors">
+                            <span className="w-8 h-8 rounded-lg bg-[var(--brand-soft)] text-[var(--brand-text)] grid place-items-center shrink-0 group-hover:bg-[var(--surface)] transition-colors">
                               <item.icon size={15} />
                             </span>
-                            <span className="text-sm font-medium text-slate-700 group-hover:text-blue-600 transition-colors">
+                            <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--brand-text)] transition-colors">
                               {item.label}
                             </span>
                             {item.status && (
-                              <span className="ml-auto text-[9px] font-semibold tracking-wide text-blue-600 bg-blue-50 px-2 py-1 rounded-full shrink-0">
+                              <span className="ml-auto text-[9px] font-semibold tracking-wide text-[var(--brand-text)] bg-[var(--brand-soft)] px-2 py-1 rounded-full shrink-0">
                                 {item.status}
                               </span>
                             )}
                           </>
                         );
                         const className =
-                          "flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-blue-50 transition-colors group";
+                          "flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-[var(--brand-soft)] transition-colors group";
 
                         return item.external ? (
 
@@ -157,7 +158,7 @@ export default function Navbar() {
             onMouseEnter={() => setInfoOpen(true)}
             onMouseLeave={() => setInfoOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+            <button className="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] transition-colors">
               Informasi
               <ChevronDown
                 size={15}
@@ -171,12 +172,12 @@ export default function Navbar() {
                   : "opacity-0 scale-95 pointer-events-none"
               }`}
             >
-              <div className="bg-white rounded-xl shadow-lg border border-slate-100 py-2 w-48">
+              <div className="bg-[var(--surface)] rounded-xl shadow-lg border border-[var(--border-subtle)] py-2 w-48">
                 {infoLinks.map((l) => (
                   <Link
                     key={l.to}
                     to={l.to}
-                    className="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    className="block px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--brand-soft)] hover:text-[var(--brand-text)] transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -187,25 +188,30 @@ export default function Navbar() {
 
 
             <a href="#kontak"
-            className="text-sm font-semibold text-white bg-slate-900 hover:bg-blue-600 transition-colors px-5 py-2.5 rounded-full"
+            className="text-sm font-semibold text-white bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors px-5 py-2.5 rounded-full"
           >
             Kontak Kami
           </a>
+
+          <ThemeToggle />
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-slate-700"
-          onClick={() => setOpen(!open)}
-          aria-label="Buka menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: toggle tema + tombol menu */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="p-2 text-[var(--text-secondary)]"
+            onClick={() => setOpen(!open)}
+            aria-label="Buka menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-slate-100 ${
+        className={`md:hidden overflow-hidden transition-all duration-300 bg-[var(--surface)] border-t border-[var(--border-subtle)] ${
           open ? "max-h-96" : "max-h-0"
         }`}
       >
@@ -214,12 +220,12 @@ export default function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              className="py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600"
+              className="py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)]"
             >
               {l.label}
             </Link>
           ))}
-          <p className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase mt-3 mb-1">
+          <p className="text-[11px] font-semibold tracking-wider text-[var(--text-faint)] uppercase mt-3 mb-1">
             Aspirasi
           </p>
           {aspirasiGroups.flatMap((g) => g.items).map((item) =>
@@ -229,23 +235,23 @@ export default function Navbar() {
                 href={item.to}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="flex items-center gap-2 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)]"
               >
-                <item.icon size={15} className="text-blue-600" />
+                <item.icon size={15} className="text-[var(--brand-text)]" />
                 {item.label}
               </a>
             ) : (
               <Link
                 key={item.label}
                 to={item.to}
-                className="flex items-center gap-2 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="flex items-center gap-2 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)]"
               >
-                <item.icon size={15} className="text-blue-600" />
+                <item.icon size={15} className="text-[var(--brand-text)]" />
                 {item.label}
               </Link>
             )
           )}
-          <a href="#kontak" className="py-2.5 text-sm font-semibold text-blue-600 mt-2">
+          <a href="#kontak" className="py-2.5 text-sm font-semibold text-[var(--brand-text)] mt-2">
             Kontak Kami
           </a>
         </div>

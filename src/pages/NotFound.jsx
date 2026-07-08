@@ -48,7 +48,7 @@ export default function NotFound() {
             y1={nodes[a].y}
             x2={nodes[b].x}
             y2={nodes[b].y}
-            stroke="#3b82f6"
+            stroke="#7c3aed"
             strokeWidth="1"
           />
         ))}
@@ -63,7 +63,7 @@ export default function NotFound() {
             cx={n.x}
             cy={n.y}
             r={i === bx || i === by ? 6 : 4}
-            fill={i === bx || i === by ? "#f87171" : "#60a5fa"}
+            fill={i === bx || i === by ? "#f87171" : "#a78bfa"}
             animate={{ cy: [n.y, n.y - 6, n.y] }}
             transition={{
               duration: 3 + (i % 4),
@@ -104,21 +104,21 @@ export default function NotFound() {
           Koneksi Terputus
         </div>
 
-        <p className="font-display font-extrabold text-8xl md:text-9xl bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent leading-none mb-6">
+        <p className="font-display font-extrabold text-8xl md:text-9xl bg-gradient-to-b from-white to-violet-300 bg-clip-text text-transparent leading-none mb-6">
           404
         </p>
 
         <h1 className="font-display font-bold text-xl md:text-2xl text-white mb-3">
           Node yang kamu cari nggak ditemukan
         </h1>
-        <p className="text-slate-400 text-sm md:text-base mb-10">
+        <p className="text-[var(--text-faint)] text-sm md:text-base mb-10">
           Halaman ini mungkin sudah dipindahkan, dihapus, atau memang belum
           pernah ada di jaringan kami.
         </p>
 
         <Link
           to="/"
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
+          className="inline-flex items-center gap-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
         >
           <Home size={16} />
           Kembali ke Beranda

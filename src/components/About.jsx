@@ -1,5 +1,14 @@
 import Reveal from "./Reveal";
 import Eyebrow from "./Eyebrow";
+import PhotoStack from "./PhotoStack";
+
+// Tambahkan/ganti foto di sini — urutan pertama = paling depan
+const aboutPhotos = [
+  { src: "/hmps-2.jpg", alt: "Kegiatan komunitas HMPS INF" },
+  { src: "/hmps-1.jpg", alt: "Dokumentasi HMPS INF" },
+  { src: "/hmps-3.jpg", alt: "Penyambutan maba inf" },
+
+];
 
 export default function About() {
   return (
@@ -7,16 +16,16 @@ export default function About() {
       <div className="grid md:grid-cols-2 gap-14 items-center">
         <Reveal>
           <Eyebrow>TENTANG KAMI</Eyebrow>
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-6 leading-tight text-slate-900">
-            Mengenal Kabinet <span className="text-blue-600">LAZARUS</span>
+          <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-6 leading-tight text-[var(--text-primary)]">
+            Mengenal Kabinet <span className="text-[var(--brand-text)]">LAZARUS</span>
           </h2>
-          <p className="text-slate-600 leading-relaxed mb-4">
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             Kabinet Lazarus adalah wadah resmi bagi mahasiswa Program Studi
             Informatika untuk mengembangkan potensi diri, meningkatkan
             kemampuan akademis, dan menyalurkan aspirasi, bakat, minat, serta
             kreativitas.
           </p>
-          <p className="text-slate-600 leading-relaxed">
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             Kami berkomitmen membentuk mahasiswa yang berkompeten, kreatif,
             dan berintegritas dan menjadi jembatan antara mahasiswa dan civitas
             akademika UINSMHB, menciptakan lingkungan akademis yang dinamis dan
@@ -25,17 +34,10 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.15}>
-        <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
-        <img
-            src="/hmps-2.jpg"
-            alt="Kegiatan komunitas HMPS INF"
-            className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur-sm text-white rounded-xl px-4 py-3">
-            <p className="text-sm font-semibold">HMPS INF</p>
-            <p className="text-xs text-slate-300">Himpunan Mahasiswa Informatika</p>
-        </div>
-        </div>
+          <PhotoStack images={aboutPhotos} size={380} />
+          <p className="text-center text-xs text-[var(--text-faint)] mt-6">
+            Klik foto untuk lihat foto berikutnya
+          </p>
         </Reveal>
       </div>
     </section>

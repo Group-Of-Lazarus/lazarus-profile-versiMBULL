@@ -52,10 +52,10 @@ export default function Culture() {
     <section className="container-hmps py-24 md:py-28">
       <Reveal>
         <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
-          <p className="font-display font-bold text-lg text-slate-900 mb-3">
+          <p className="font-display font-bold text-lg text-[var(--text-primary)] mb-3">
             Departemen HMPS Informatika
           </p>
-          <h2 className="font-display font-extrabold text-3xl md:text-5xl leading-tight text-blue-600">
+          <h2 className="font-display font-extrabold text-3xl md:text-5xl leading-tight text-[var(--brand-text)]">
             Penjelasan Tugas dan Fungsi Setiap Departemen di HMPS Informatika
           </h2>
         </div>
@@ -66,14 +66,14 @@ export default function Culture() {
           <Reveal key={department.name} delay={i * 0.08}>
             <article className="h-full">
               <div className="flex items-center gap-3 mb-4">
-                <span className="w-14 h-14 rounded-full bg-blue-600 text-white grid place-items-center shrink-0">
+                <span className="w-14 h-14 rounded-full bg-[var(--brand)] text-white grid place-items-center shrink-0">
                   <department.icon size={27} strokeWidth={2.5} />
                 </span>
-                <h3 className="font-display font-extrabold text-2xl md:text-3xl text-slate-950">
+                <h3 className="font-display font-extrabold text-2xl md:text-3xl text-[var(--text-primary)]">
                   {department.name}
                 </h3>
               </div>
-              <p className="text-base md:text-lg text-slate-800 leading-relaxed">
+              <p className="text-base md:text-lg text-[var(--text-primary)] leading-relaxed">
                 {department.desc}
               </p>
             </article>
@@ -82,7 +82,7 @@ export default function Culture() {
       </div>
 
       <Reveal delay={0.56}>
-        <p className="text-center text-sm text-slate-500 mt-16">
+        <p className="text-center text-sm text-[var(--text-muted)] mt-16">
           Ngahiji, Ngajaga Informatika.
         </p>
       </Reveal>
