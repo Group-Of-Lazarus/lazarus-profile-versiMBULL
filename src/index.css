@@ -41,6 +41,9 @@
   --brand-soft: var(--color-blue-50);
   --brand-soft-text: var(--color-blue-700);
   --brand-ring: var(--color-blue-100);
+
+  --pattern-line: rgba(15, 23, 42, 0.06);
+  --pattern-dot: rgba(45, 79, 165, 0.22);
 }
 
 .dark {
@@ -61,6 +64,9 @@
   --brand-soft: rgba(45, 79, 165, 0.15);
   --brand-soft-text: var(--color-blue-300);
   --brand-ring: rgba(45, 79, 165, 0.30);
+
+  --pattern-line: rgba(255, 255, 255, 0.06);
+  --pattern-dot: rgba(94, 130, 214, 0.35);
 }
 
 html {
@@ -89,6 +95,15 @@ h1, h2, h3, h4 {
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.bg-pattern-grid {
+  background-image:
+    radial-gradient(var(--pattern-dot) 1.4px, transparent 1.4px),
+    linear-gradient(to right, var(--pattern-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pattern-line) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px, 32px 32px;
+  background-position: -1px -1px, -1px -1px, -1px -1px;
 }
 
 @media (prefers-reduced-motion: reduce) {

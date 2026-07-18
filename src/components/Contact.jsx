@@ -35,7 +35,8 @@ const platforms = [
 
 export default function Contact() {
   return (
-    <section id="kontak" className="container-hmps py-24 md:py-28">
+    <section id="kontak" className="bg-pattern-grid">
+      <div className="container-hmps py-24 md:py-28">
       <div className="grid md:grid-cols-2 gap-14 items-start">
         <Reveal>
           <Eyebrow>KONTAK KAMI</Eyebrow>
@@ -83,6 +84,7 @@ export default function Contact() {
             </Reveal>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

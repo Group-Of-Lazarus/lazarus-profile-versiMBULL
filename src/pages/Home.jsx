@@ -9,9 +9,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
-      <VisiMisi />
-      <Culture />
+      <div className="bg-pattern-grid">
+        <About />
+        <VisiMisi />
+        <Culture />
+      </div>
       <ActivityPreview />
       <Contact />
     </>

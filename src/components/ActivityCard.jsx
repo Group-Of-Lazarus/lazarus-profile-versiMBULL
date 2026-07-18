@@ -8,13 +8,37 @@ const statusStyle = {
 };
 
 export default function ActivityCard({ item, index = 0 }) {
+  // Kalau field `cover` diisi path foto asli (diawali "/"), pakai foto itu.
+  // Kalau belum ada foto (mis. masih "gradient-blue" atau kosong), fallback ke gradient.
+  const hasPhoto = Boolean(item.cover) && item.cover.startsWith("/");
+
   return (
     <Link
       to={`/aktivitas/${item.slug}`}
       className="group block bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border-subtle)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[16/11] bg-gradient-to-br from-blue-800 via-blue-600 to-blue-500 overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white,transparent_40%)]" />
+      <div className="relative aspect-[16/11] overflow-hidden">
+        {hasPhoto ? (
+          <>
+            <img
+              src={item.cover}
+              alt={item.judul}
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/10 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800 via-blue-600 to-blue-500" />
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white,transparent_40%)]" />
+            <div className="absolute inset-0 flex items-center justify-center px-6">
+              <p className="text-white font-display font-extrabold text-3xl md:text-4xl text-center leading-none drop-shadow-lg group-hover:scale-105 transition-transform duration-300">
+                {item.judul}
+              </p>
+            </div>
+          </>
+        )}
+
         <span
           className={`absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${statusStyle[item.status]}`}
         >
@@ -26,11 +50,6 @@ export default function ActivityCard({ item, index = 0 }) {
         <span className="absolute top-4 right-4 text-white/80">
           {"</>"}
         </span>
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <p className="text-white font-display font-extrabold text-3xl md:text-4xl text-center leading-none drop-shadow-lg group-hover:scale-105 transition-transform duration-300">
-            {item.judul}
-          </p>
-        </div>
       </div>
 
       <div className="p-6">
