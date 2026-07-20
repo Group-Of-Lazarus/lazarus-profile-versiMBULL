@@ -9,13 +9,13 @@ const itcamp = {
     durasi: "2 hari",
     judul: "IT CAMP 2026",
     ringkas:
-        "event kaderasi jurusan untuk menyambut mahasiswa baru jurusan informatika, event ini akan memperkenalkan seputar jurusan & organisasi hmps informatika tersebut.",
+        "event kaderisasi jurusan untuk menyambut mahasiswa baru jurusan informatika, event ini akan memperkenalkan seputar jurusan & organisasi hmps informatika tersebut.",
     cover: "/aktivitas/IT-CAMP.png",
     detail: {
         judulBesar: "IT CAMP 2026",
         subjudul: "Satukan Mahasiswa Informatika, Bangun Generasi Digital",
         deskripsi:
-            "event kaderasi jurusan untuk menyambut mahasiswa baru jurusan informatika, event ini akan memperkenalkan seputar jurusan & organisasi hmps informatika tersebut. biasanya di jalankan di luar kampus contoh nya di villa.",
+            "event kaderisasi jurusan untuk menyambut mahasiswa baru jurusan informatika, event ini akan memperkenalkan seputar jurusan & organisasi hmps informatika tersebut. biasanya di jalankan di luar kampus contoh nya di villa.",
         speakers: [
             { nama: "Ahmad Tabrani M.T", peran: "Kepala Program Studi Informatika" },
             { nama: "Naufal Afaf Ekayana", peran: "Kepala Departemen Internal" },

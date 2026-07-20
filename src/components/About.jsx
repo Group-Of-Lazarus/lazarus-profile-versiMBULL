@@ -35,7 +35,7 @@ export default function About() {
             />
           </h2>
           <TextReveal
-            text="Kabinet Lazarus adalah wadah resmi bagi mahasiswa Program Studi Informatika untuk mengembangkan potensi diri, meningkatkan kemampuan akademis, dan menyalurkan aspirasi, bakat, minat, serta kreativitas."
+            text="Himpunan Mahasiswa Informatika adalah wadah resmi bagi mahasiswa Program Studi Informatika untuk mengembangkan potensi diri, meningkatkan kemampuan akademis, dan menyalurkan aspirasi, bakat, minat, serta kreativitas."
             className="text-[var(--text-secondary)] leading-relaxed mb-4"
           />
           <p className="text-[var(--text-secondary)] leading-relaxed">

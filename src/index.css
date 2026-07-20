@@ -99,11 +99,10 @@ h1, h2, h3, h4 {
 
 .bg-pattern-grid {
   background-image:
-    radial-gradient(var(--pattern-dot) 1.4px, transparent 1.4px),
     linear-gradient(to right, var(--pattern-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--pattern-line) 1px, transparent 1px);
-  background-size: 32px 32px, 32px 32px, 32px 32px;
-  background-position: -1px -1px, -1px -1px, -1px -1px;
+  background-size: 32px 32px, 32px 32px;
+  background-position: -1px -1px, -1px -1px;
 }
 
 @keyframes marquee {
