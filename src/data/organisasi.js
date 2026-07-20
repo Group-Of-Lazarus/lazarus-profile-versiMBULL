@@ -25,6 +25,10 @@ export const departemenList = [
       { nama: "Farhan Tirta Firdaus", nim: "251603055", foto: "" },
       { nama: "Dwi Rianti", nim: "251603018", foto: "" },
     ],
+    proker: [
+      { nama: "Upgrading Pengurus", tanggal: "Agustus 2026" },
+      { nama: "Rapat Kerja (Raker)", tanggal: "September 2026" },
+    ],
   },
   {
     slug: "internal",
@@ -40,6 +44,10 @@ export const departemenList = [
       { nama: "Mufarrihah Az-Zahra", nim: "251603059", foto: "" },
       { nama: "Nabilah Barliana Putri Dewi", nim: "251603076", foto: "" },
     ],
+    proker: [
+      { nama: "Keakraban Anggota", tanggal: "Agustus 2026" },
+      { nama: "Malam Keakraban HMPS", tanggal: "November 2026" },
+    ],
   },
   {
     slug: "eksternal",
@@ -53,6 +61,10 @@ export const departemenList = [
       { nama: "Anjani Meysun Nine Dzalail", nim: "251603027", foto: "" },
       { nama: "Alfiana", nim: "251603004", foto: "" },
       { nama: "Rosita", nim: "251603075", foto: "" },
+    ],
+    proker: [
+      { nama: "Studi Banding Organisasi", tanggal: "Oktober 2026" },
+      { nama: "Kunjungan Industri", tanggal: "Desember 2026" },
     ],
   },
   {
@@ -69,6 +81,10 @@ export const departemenList = [
       { nama: "Nilam Cahya Lestari", nim: "251603099", foto: "" },
       { nama: "Rayshard Fadlan Maulani", nim: "251603051", foto: "" },
     ],
+    proker: [
+      { nama: "Konten Media Sosial Mingguan", tanggal: "Sepanjang tahun" },
+      { nama: "Peliputan & Dokumentasi Event", tanggal: "Sepanjang tahun" },
+    ],
   },
   {
     slug: "mikat",
@@ -83,6 +99,10 @@ export const departemenList = [
       { nama: "Yanti Apriliyanti", nim: "251603001", foto: "" },
       { nama: "Sahansyah Abdillah", nim: "251603023", foto: "" },
     ],
+    proker: [
+      { nama: "IT Sport Tournament", tanggal: "Oktober 2026" },
+      { nama: "Lomba Coding Internal", tanggal: "Januari 2027" },
+    ],
   },
   {
     slug: "pemberdayaan-perempuan",
@@ -94,6 +114,10 @@ export const departemenList = [
       { nama: "Annisa Wening Galih", nim: "241730098", foto: "" },
       { nama: "Halida Hamzah", nim: "251603044", foto: "" },
       { nama: "Tria Nadirotun Yumna", nim: "251603038", foto: "" },
+    ],
+    proker: [
+      { nama: "Seminar Kesetaraan & Ruang Aman", tanggal: "September 2026" },
+      { nama: "Kelas Edukasi Perempuan", tanggal: "November 2026" },
     ],
   },
   {
@@ -107,6 +131,10 @@ export const departemenList = [
       { nama: "Amar Subagja Firdaus", nim: "241730021", foto: "" },
       { nama: "Ima Imaniyah Hasanah", nim: "251603042", foto: "" },
       { nama: "Maulida Rahmania", nim: "251603092", foto: "" },
+    ],
+    proker: [
+      { nama: "Bazar Kreatif Informatika", tanggal: "Oktober 2026" },
+      { nama: "Pelatihan Kewirausahaan Digital", tanggal: "Februari 2027" },
     ],
   },
 ];

@@ -185,14 +185,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-
-
-            <a href="#kontak"
-            className="text-sm font-semibold text-white bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors px-5 py-2.5 rounded-full"
-          >
-            Kontak Kami
-          </a>
-
           <ThemeToggle />
         </div>
 

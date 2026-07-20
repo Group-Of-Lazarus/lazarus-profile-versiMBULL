@@ -38,12 +38,13 @@ export default function About() {
             text="Himpunan Mahasiswa Informatika adalah wadah resmi bagi mahasiswa Program Studi Informatika untuk mengembangkan potensi diri, meningkatkan kemampuan akademis, dan menyalurkan aspirasi, bakat, minat, serta kreativitas."
             className="text-[var(--text-secondary)] leading-relaxed mb-4"
           />
-          <p className="text-[var(--text-secondary)] leading-relaxed">
-            Kami berkomitmen membentuk mahasiswa yang berkompeten, kreatif,
-            dan berintegritas dan menjadi jembatan antara mahasiswa dan civitas
-            akademika UINSMHB, menciptakan lingkungan akademis yang dinamis dan
-            berdampak.
-          </p>
+          <TextReveal
+            text="Kami berkomitmen membentuk mahasiswa yang berkompeten, kreatif,
+            dan berintegritas serta menjadi jembatan antara mahasiswa dan civitas
+            akademika untuk menciptakan lingkungan akademis yang dinamis dan
+            berdampak."
+            className="text-[var(--text-secondary)] leading-relaxed"
+          />
         </Reveal>
 
         <Reveal delay={0.15}>

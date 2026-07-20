@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import Eyebrow from "./Eyebrow";
+import ShinyText from './ShinyText';
 
 const misi = [
   "Meningkatkan kualitas akademik dan keilmuan mahasiswa Informatika.",
@@ -28,12 +29,19 @@ export default function VisiMisi() {
               <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-300 mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-300" /> VISI
               </span>
-              <p className="text-xl md:text-2xl font-medium leading-snug">
-                Menjadikan Himpunan Mahasiswa Informatika UIN Banten sebagai wadah pengembangan akademik, keterampilan teknologi, serta pembentukan karakter mahasiswa yang aktif dan berdaya saing.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-[var(--text-faint)] text-xs mt-10 pt-6 border-t border-white/10">
-              <span className="w-6 h-px bg-slate-500" /> LAZARUS 2025
+              <ShinyText
+                text="✨Menjadikan Himpunan Mahasiswa Informatika UIN Banten sebagai wadah pengembangan akademik, keterampilan teknologi, serta pembentukan karakter mahasiswa yang aktif dan berdaya saing."
+                className="text-xl md:text-2xl font-medium leading-snug"
+                speed={2}
+                delay={0}
+                color="#b5b5b5"
+                shineColor="#ffffff"
+                spread={120}
+                direction="left"
+                yoyo={false}
+                pauseOnHover={false}
+                disabled={false}
+                />
             </div>
           </div>
         </Reveal>
