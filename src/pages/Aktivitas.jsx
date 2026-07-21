@@ -3,17 +3,31 @@ import { Search } from "lucide-react";
 import Reveal from "../components/Reveal";
 import PageHero from "../components/PageHero";
 import ActivityCard from "../components/ActivityCard";
+import Dropdown from "../components/ui/dropdown";
 import { aktivitasList, filterStatus } from "../data/aktivitas";
+import { departemenList } from "../data/organisasi";
+
+const deptOptions = [
+  { key: "semua", label: "Semua Departemen" },
+  ...departemenList.map((d) => ({ key: d.slug, label: d.nama })),
+];
 
 export default function Aktivitas() {
-  const [active, setActive] = useState("semua");
+  const [statusFilter, setStatusFilter] = useState("semua");
+  const [deptFilter, setDeptFilter] = useState("semua");
   const [query, setQuery] = useState("");
 
   const filtered = aktivitasList.filter((a) => {
-    const matchStatus = active === "semua" || a.status === active;
+    const matchStatus = statusFilter === "semua" || a.status === statusFilter;
+    const matchDept = deptFilter === "semua" || a.departemen === deptFilter;
     const matchQuery = a.judul.toLowerCase().includes(query.toLowerCase());
-    return matchStatus && matchQuery;
+    return matchStatus && matchDept && matchQuery;
   });
+
+  const selectedDeptLabel =
+    deptFilter !== "semua"
+      ? departemenList.find((d) => d.slug === deptFilter)?.nama
+      : null;
 
   return (
     <div className="pb-24">
@@ -25,22 +39,21 @@ export default function Aktivitas() {
 
       <div className="container-hmps pt-14">
         <Reveal
-          className="flex flex-col md:flex-row md:items-center gap-4 mb-10"
+          className="flex flex-col md:flex-row md:items-center gap-3 mb-10"
         >
-          <div className="flex items-center gap-2 flex-wrap flex-1">
-            {filterStatus.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setActive(f.key)}
-                className={`text-sm font-medium px-5 py-2.5 rounded-full border transition-colors ${
-                  active === f.key
-                    ? "bg-[var(--brand)] border-[var(--brand)] text-white"
-                    : "bg-[var(--surface)] border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--brand)]"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
+          <div className="flex items-center gap-3 flex-wrap flex-1">
+            <Dropdown
+              label="Status"
+              options={filterStatus}
+              value={statusFilter}
+              onChange={setStatusFilter}
+            />
+            <Dropdown
+              label="Proker"
+              options={deptOptions}
+              value={deptFilter}
+              onChange={setDeptFilter}
+            />
           </div>
 
           <div className="relative w-full md:w-72">
@@ -69,7 +82,9 @@ export default function Aktivitas() {
           ))}
           {filtered.length === 0 && (
             <p className="text-[var(--text-muted)] col-span-full text-center py-16">
-              Tidak ada aktivitas yang cocok dengan pencarianmu.
+              {selectedDeptLabel
+                ? `Departemen ${selectedDeptLabel} belum memiliki proker di aktivitas ini.`
+                : "Tidak ada aktivitas yang cocok dengan pencarianmu."}
             </p>
           )}
         </div>

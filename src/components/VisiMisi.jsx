@@ -1,5 +1,4 @@
 import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
 import ShinyText from './ShinyText';
 
 const misi = [
@@ -12,7 +11,6 @@ export default function VisiMisi() {
   return (
     <section className="container-hmps py-24 md:py-28">
       <Reveal>
-        <Eyebrow>VISI & MISI</Eyebrow>
         <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
           Arah & <span className="text-[var(--brand-text)]">Tujuan</span> Kami
         </h2>

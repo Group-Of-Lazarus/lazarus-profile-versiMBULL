@@ -1,5 +1,4 @@
 import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
 import { ArrowUpRight } from "lucide-react";
 
 const platforms = [
@@ -39,7 +38,6 @@ export default function Contact() {
       <div className="container-hmps py-24 md:py-28">
       <div className="grid md:grid-cols-2 gap-14 items-start">
         <Reveal>
-          <Eyebrow>KONTAK KAMI</Eyebrow>
           <h2 className="font-display font-extrabold text-5xl md:text-6xl mt-5 mb-6 leading-[1.05] text-[var(--text-primary)]">
             Ayo,{" "}
             <span className="text-[var(--brand-text)] block">Terhubung</span>

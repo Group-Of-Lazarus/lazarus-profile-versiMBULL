@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
 import ActivityCard from "./ActivityCard";
 import Dropdown from "./ui/dropdown";
 import { aktivitasList, filterStatus } from "../data/aktivitas";
@@ -32,7 +31,6 @@ export default function ActivityPreview() {
       <div className="container-hmps">
         <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <Eyebrow>AGENDA TERBARU</Eyebrow>
             <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)]">
               Aktivitas <span className="text-[var(--brand-text)]">Terbaru</span>
             </h2>

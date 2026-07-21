@@ -1,5 +1,4 @@
 import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
 import PhotoStack from "./PhotoStack";
 import RotatingText from "./RotatingText";
 import TextReveal from "./TextReveal";
@@ -15,7 +14,6 @@ export default function About() {
     <section id="tentang" className="container-hmps py-24 md:py-28">
       <div className="grid md:grid-cols-2 gap-14 items-center">
         <Reveal>
-          <Eyebrow>TENTANG KAMI</Eyebrow>
           <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-6 leading-tight text-[var(--text-primary)] flex flex-wrap items-center gap-3">
             Informatika
             <RotatingText
