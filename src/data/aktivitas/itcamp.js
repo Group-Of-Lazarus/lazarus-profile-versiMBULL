@@ -1,6 +1,7 @@
 const itcamp = {
     slug: "kaderisasi mahasiswa informatika 2026",
     kategori: "KADERISASI",
+    departemen: "internal", // slug departemen penyelenggara, samain dengan slug di src/data/organisasi.js
     status: "akan-datang", // "akan-datang" | "berlangsung" | "selesai"
     tipe: "offline",
     lokasi: "villa anyer beach resort",

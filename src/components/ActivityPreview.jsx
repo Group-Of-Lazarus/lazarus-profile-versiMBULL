@@ -3,15 +3,29 @@ import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
 import Eyebrow from "./Eyebrow";
 import ActivityCard from "./ActivityCard";
+import Dropdown from "./ui/dropdown";
 import { aktivitasList, filterStatus } from "../data/aktivitas";
+import { departemenList } from "../data/organisasi";
+
+const deptOptions = [
+  { key: "semua", label: "Semua Departemen" },
+  ...departemenList.map((d) => ({ key: d.slug, label: d.nama })),
+];
 
 export default function ActivityPreview() {
-  const [active, setActive] = useState("semua");
+  const [statusFilter, setStatusFilter] = useState("semua");
+  const [deptFilter, setDeptFilter] = useState("semua");
 
-  const filtered =
-    active === "semua"
-      ? aktivitasList
-      : aktivitasList.filter((a) => a.status === active);
+  const filtered = aktivitasList.filter((a) => {
+    const matchStatus = statusFilter === "semua" || a.status === statusFilter;
+    const matchDept = deptFilter === "semua" || a.departemen === deptFilter;
+    return matchStatus && matchDept;
+  });
+
+  const selectedDeptLabel =
+    deptFilter !== "semua"
+      ? departemenList.find((d) => d.slug === deptFilter)?.nama
+      : null;
 
   return (
     <section className="bg-[var(--surface-alt)] py-24 md:py-28">
@@ -35,20 +49,19 @@ export default function ActivityPreview() {
           </Link>
         </Reveal>
 
-        <Reveal delay={0.1} className="flex items-center gap-2 flex-wrap mb-10">
-          {filterStatus.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setActive(f.key)}
-              className={`text-sm font-medium px-5 py-2.5 rounded-full border transition-colors ${
-                active === f.key
-                  ? "bg-[var(--brand)] border-[var(--brand)] text-white"
-                  : "bg-[var(--surface)] border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--brand)]"
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+        <Reveal delay={0.1} className="flex items-center gap-3 flex-wrap mb-10">
+          <Dropdown
+            label="Status"
+            options={filterStatus}
+            value={statusFilter}
+            onChange={setStatusFilter}
+          />
+          <Dropdown
+            label="Proker"
+            options={deptOptions}
+            value={deptFilter}
+            onChange={setDeptFilter}
+          />
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -59,7 +72,9 @@ export default function ActivityPreview() {
           ))}
           {filtered.length === 0 && (
             <p className="text-[var(--text-muted)] col-span-full text-center py-12">
-              Belum ada aktivitas untuk kategori ini.
+              {selectedDeptLabel
+                ? `Departemen ${selectedDeptLabel} belum memiliki proker di aktivitas ini.`
+                : "Belum ada aktivitas untuk kategori ini."}
             </p>
           )}
         </div>

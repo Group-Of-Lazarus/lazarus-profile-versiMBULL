@@ -19,10 +19,9 @@ export const HoverEffect = ({ items, className }) => {
   const [activeDept, setActiveDept] = useState(null);
 
   return (
-    <>
       <div
         className={cn(
-          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2",
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
           className
         )}
       >
@@ -34,24 +33,22 @@ export const HoverEffect = ({ items, className }) => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <AnimatePresence>
-              {hoveredIndex === idx && (
-               <motion.span
-                className="absolute inset-0 h-full w-full rounded-3xl block"
-                style={{ background: "var(--brand-ring)" }}
+            {hoveredIndex === idx && (
+              <motion.span
+                className="absolute inset-0 h-full w-full bg-gradient-to-br from-blue-400/80 to-blue-600/80 block rounded-3xl"
                 layoutId="hoverBackground"
-                transition={{ layout: { type: "spring", stiffness: 300, damping: 30 } }}
                 initial={{ opacity: 0 }}
                 animate={{
-                    opacity: 1,
-                    transition: { duration: 0.15 },
+                  opacity: 1,
+                  transition: { duration: 0.15 },
                 }}
                 exit={{
-                    opacity: 0,
-                    transition: { duration: 0.15, delay: 0.2 },
+                  opacity: 0,
+                  transition: { duration: 0.15, delay: 0.2 },
                 }}
-                />
-              )}
-            </AnimatePresence>
+              />
+            )}
+          </AnimatePresence>
 
             <Card>
               <div className="flex items-center gap-3 mb-3">
@@ -75,10 +72,8 @@ export const HoverEffect = ({ items, className }) => {
             </Card>
           </div>
         ))}
+        <ProkerModal department={activeDept} onClose={() => setActiveDept(null)} />
       </div>
-
-      <ProkerModal department={activeDept} onClose={() => setActiveDept(null)} />
-    </>
   );
 };
 
