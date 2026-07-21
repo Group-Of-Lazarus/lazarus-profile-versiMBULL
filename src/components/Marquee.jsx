@@ -1,16 +1,15 @@
-export default function Marquee({ items, className = "" }) {
+export default function Marquee({ children, className = "", duration = 28 }) {
   return (
-    <div className={`overflow-hidden whitespace-nowrap ${className}`}>
-      <div className="flex w-max animate-marquee">
-        {[...items, ...items].map((item, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-3 mx-6 text-sm md:text-base font-semibold uppercase tracking-wide text-white shrink-0"
-          >
-            {item}
-            <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
-          </span>
-        ))}
+    <div className={`overflow-hidden ${className}`}>
+      <div
+        className="flex w-max animate-marquee"
+        style={{ animationDuration: `${duration}s` }}
+      >
+        {/* Blok konten diduplikat 2x biar animasinya nyambung terus tanpa putus */}
+        <div className="flex items-center shrink-0">{children}</div>
+        <div className="flex items-center shrink-0" aria-hidden="true">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import VisiMisi from "../components/VisiMisi";
@@ -5,14 +6,19 @@ import Culture from "../components/Culture";
 import ActivityPreview from "../components/ActivityPreview";
 import Contact from "../components/Contact";
 import Marquee from "../components/Marquee";
+import {
+  GraduationCap,
+  Cpu,
+  Users,
+  Trophy,
+  ArrowRight,
+} from "lucide-react";
 
-const marqueeItems = [
-  "Akademik",
-  "Teknologi",
-  "Organisasi",
-  "Kolaborasi",
-  "Kreativitas",
-  "Solidaritas",
+const marqueeBadges = [
+  { icon: GraduationCap, label: "Akademik" },
+  { icon: Cpu, label: "Teknologi" },
+  { icon: Users, label: "Organisasi" },
+  { icon: Trophy, label: "Prestasi" },
 ];
 
 export default function Home() {
@@ -20,8 +26,49 @@ export default function Home() {
     <>
       <Hero />
 
-      <div className="bg-gradient-to-r from-[var(--brand)] to-[var(--brand-hover)] py-4 overflow-hidden">
-        <Marquee items={marqueeItems} />
+      <div className="container-hmps my-8">
+        <Marquee
+          duration={30}
+          className="rounded-3xl bg-gradient-to-r from-blue-400 via-slate-400 to-[var(--brand)] shadow-lg"
+        >
+          <div className="flex items-center gap-8 pl-8 pr-3 py-3">
+            <span className="inline-flex items-center gap-3 shrink-0">
+                <span className="w-9 h-9 rounded-full bg-white grid place-items-center shrink-0 overflow-hidden">
+                <img
+                    src="/logo_hmps.png"
+                    alt="Logo HMPS Informatika"
+                    className="w-6 h-6 object-contain"
+                />
+                </span>
+                <span className="text-white font-extrabold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">
+                HMPS Informatika
+                </span>
+            </span>
+
+            <p className="text-white/90 text-sm md:text-base font-medium whitespace-nowrap">
+                wadah resmi bagi mahasiswa Program Studi Informatika
+                untuk mengembangkan potensi diri.
+            </p>
+
+            {marqueeBadges.map(({ icon: Icon, label }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-2 text-white font-medium text-sm md:text-base shrink-0"
+              >
+                <Icon size={18} strokeWidth={2.2} />
+                {label}
+              </span>
+            ))}
+
+            <Link
+              to="/aktivitas"
+              className="inline-flex items-center gap-2 bg-white text-[var(--brand)] font-semibold text-sm px-5 py-2.5 rounded-full shrink-0 hover:bg-white/90 transition-colors"
+            >
+              Jelajahi HMPS
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </Marquee>
       </div>
 
       {/* Pattern grid+dot nyambung dari "Tentang" sampai "Departemen" (Culture) */}
