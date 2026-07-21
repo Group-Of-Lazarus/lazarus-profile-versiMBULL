@@ -27,7 +27,7 @@ export default function DesktopGate({ children }) {
 
         <motion.img
           src="/maskot-kucing.png"
-          alt="Maskot HMPS Informatika lagi kerja di laptop"
+          alt="Maskot HMPS Informatika lagi kerja di laptop, jadi sabar yaaa"
           className="w-56 sm:w-64 md:w-72 drop-shadow-2xl relative z-10 select-none"
           animate={{ y: [0, -14, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
