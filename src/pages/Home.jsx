@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
-import Hero from "../components/Hero";
 import Seo, { SITE_URL, SITE_NAME } from "../components/Seo";
+import Hero from "../components/Hero";
 import About from "../components/About";
 import VisiMisi from "../components/VisiMisi";
 import Culture from "../components/Culture";
 import ActivityPreview from "../components/ActivityPreview";
 import Contact from "../components/Contact";
 import Marquee from "../components/Marquee";
+import LogoLoop from "../components/LogoLoop";
+import {
+  SiReact,
+  SiVite,
+  SiTailwindcss,
+  SiFramer,
+  SiGreensock,
+  SiJavascript,
+} from "react-icons/si";
 import {
   GraduationCap,
   Cpu,
@@ -20,6 +29,18 @@ const marqueeBadges = [
   { icon: Cpu, label: "Teknologi" },
   { icon: Users, label: "Organisasi" },
   { icon: Trophy, label: "Prestasi" },
+];
+
+// Logo bawaan (placeholder) buat preview LogoLoop.
+// Nanti gampang diganti jadi logo sponsor/mitra/partner
+// (tinggal ganti array ini dengan { src, alt, href } kalau pakai gambar).
+const techLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiVite />, title: "Vite", href: "https://vite.dev" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiFramer />, title: "Framer Motion", href: "https://www.framer.com/motion" },
+  { node: <SiGreensock />, title: "GSAP", href: "https://gsap.com" },
+  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/docs/Web/JavaScript" },
 ];
 
 export default function Home() {
@@ -86,6 +107,23 @@ export default function Home() {
       {/* Pattern grid+dot nyambung dari "Tentang" sampai "Departemen" (Culture) */}
       <div className="bg-pattern-grid">
         <About />
+        <div className="container-hmps py-0">
+          <div style={{ height: "76px", position: "relative", overflow: "hidden" }}>
+            <LogoLoop
+              logos={techLogos}
+              speed={80}
+              direction="left"
+              logoHeight={60}
+              gap={56}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="var(--page)"
+              ariaLabel="Teknologi yang digunakan HMPS Informatika"
+              className="text-[var(--text-secondary)]"
+            />
+          </div>
+        </div>
         <VisiMisi />
         <Culture />
       </div>

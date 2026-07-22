@@ -38,7 +38,7 @@ export default function Aktivitas() {
         description="Jelajahi berbagai kegiatan, workshop, seminar, dan kompetisi yang diselenggarakan oleh HMPS Informatika UINSMHB untuk mahasiswa."
       />
       <PageHero
-        title="Jelajahi Aktivitas Kami"
+        title="Jelajahi kegiatan HMPS Informatika"
         subtitle="Temukan berbagai kegiatan, workshop, seminar, dan kompetisi yang diselenggarakan oleh HMPS Informatika untuk meningkatkan skill kamu."
         image="/PageHero-hmps.jpg"
       />
