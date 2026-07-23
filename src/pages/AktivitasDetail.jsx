@@ -36,7 +36,7 @@ export default function AktivitasDetail() {
     });
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-24 pb-24" style={{ backgroundColor: "#FEF6E8" }}>
       <Seo
         title={item.judul}
         path={`/aktivitas/${item.slug}`}

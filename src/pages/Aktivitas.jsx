@@ -31,7 +31,7 @@ export default function Aktivitas() {
       : null;
 
   return (
-    <div className="pb-24">
+    <div className="pb-24 bg-pattern-grid">
       <Seo
         title="Aktivitas"
         path="/aktivitas"

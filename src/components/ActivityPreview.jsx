@@ -12,7 +12,7 @@ export default function ActivityPreview() {
   const latest = aktivitasList.slice(0, JUMLAH_TAMPIL);
 
   return (
-    <section className="bg-[var(--surface-alt)] pt-8 pb-24 md:pt-10 md:pb-28">
+    <section className="bg-[var(--brand-soft)] py-24 md:py-28">
       <div className="container-hmps">
         <Reveal className="flex flex-col items-center text-center gap-4 mb-12">
           <TrueFocus
