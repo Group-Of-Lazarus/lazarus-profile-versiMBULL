@@ -119,7 +119,7 @@ export default function Home() {
               scaleOnHover
               fadeOut
               fadeOutColor="var(--page)"
-              ariaLabel="Teknologi yang digunakan HMPS Informatika"
+              ariaLabel="Sponsor & Mitra Himpunan"
               className="text-[var(--text-secondary)]"
             />
           </div>

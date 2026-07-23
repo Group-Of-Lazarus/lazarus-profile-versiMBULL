@@ -82,7 +82,7 @@ const typewriterWords = [
 
 export default function Culture() {
   return (
-    <section className="container-hmps py-24 md:py-28">
+    <section className="container-hmps pt-8 pb-24 md:pt-10 md:pb-28">
       <Reveal>
         <div className="text-center max-w-4xl mx-auto mb-4 md:mb-6">
           <p className="font-display font-bold text-lg text-[var(--text-primary)] mb-3">
