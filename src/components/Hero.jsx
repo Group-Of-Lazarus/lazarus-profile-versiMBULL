@@ -67,15 +67,7 @@ export default function Hero() {
               href="/pendaftaran"
               className="inline-flex items-center gap-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
             >
-              Gabung HMPS INF →
-            </MagneticButton>
-
-            <MagneticButton
-              as="a"
-              href="#tentang"
-              className="inline-flex items-center gap-2 bg-[var(--surface)] hover:bg-[var(--surface-alt)] border border-[var(--border-subtle)] transition-colors text-[var(--text-primary)] text-sm font-semibold px-6 py-3.5 rounded-full"
-            >
-              Tentang Kami
+              Lihat Kegiatan
             </MagneticButton>
           </motion.div>
         </div>
