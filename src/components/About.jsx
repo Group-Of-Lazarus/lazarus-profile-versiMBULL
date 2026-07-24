@@ -11,7 +11,7 @@ const aboutPhotos = [
 
 export default function About() {
   return (
-    <section id="tentang" className="container-hmps py-24 md:py-28">
+    <section id="tentang" className="container-hmps py-10 md:py-10">
       <div className="grid md:grid-cols-2 gap-14 items-center">
         <Reveal>
           <h2 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-6 leading-tight text-[var(--text-primary)] flex flex-wrap items-center gap-3">

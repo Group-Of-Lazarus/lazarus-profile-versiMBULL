@@ -6,8 +6,8 @@ import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 // Tinggal tambah/ganti item di sini kalau ada foto kepengurusan baru —
 // urutannya otomatis mengikuti array ini.
 const periods = [
-  { image: "/hmps-1.jpg", label: "Kabinet Lazarus", year: "2026 / 2027" },
-  { image: "/hmps-2.jpg", label: "Kabinet Sebelumnya", year: "2025 / 2026" },
+  { image: "/kabinet-lazarus.png", label: "Kabinet Lazarus", year: "2026 / 2027" },
+  { image: "/kabinet-sinergi.png", label: "Kabinet Sinergi", year: "2025 / 2026" },
   { image: "/hmps-3.jpg", label: "Kabinet Sebelumnya", year: "2024 / 2025" },
 ];
 
