@@ -1,100 +1,84 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import BlurText from "./BlurText";
 import MagneticButton from "./MagneticButton";
+import PengurusCarousel from "./PengurusCarousel";
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
 
 export default function Hero() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  // Foto bergerak lebih pelan dari konten pas discroll — efek parallax/depth
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-screen min-h-[640px] flex items-end overflow-hidden"
-    >
-      {/* Background photo — dibuat lebih besar dari container biar nggak ada gap pas ke-geser parallax */}
-      <motion.div
-        className="absolute inset-x-0"
-        style={{ y, top: "-12%", height: "124%" }}
-      >
-        <div
-          className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/hero-2627.jpeg')" }}
-        />
-        <div className="absolute inset-0 bg-slate-900/55" />
-      </motion.div>
+    <section className="relative bg-[var(--page)] bg-pattern-grid overflow-hidden pt-28 md:pt-32">
+      {/* Glow lembut brand di kanan atas */}
+      <div className="absolute -top-40 right-[-10%] w-[600px] h-[600px] bg-[var(--brand-soft)] blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="container-hmps relative z-10 pb-24 pt-40 text-center mx-auto">
+      <div className="container-hmps relative z-10 py-20 md:py-28 grid lg:grid-cols-2 gap-16 items-center min-h-[calc(100vh-112px)]">
+        {/* Kolom kiri — teks */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[var(--text-secondary)] bg-[var(--surface)] border border-[var(--border-subtle)] rounded-full px-4 py-2 mb-8"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            Himpunan Mahasiswa Program Studi Informatika
+          </motion.div>
 
+          <BlurText
+            text="Bangun budaya digital yang solid & kreatif."
+            delay={200}
+            animateBy="words"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="font-display font-extrabold text-[var(--text-primary)] leading-[1.05] text-4xl md:text-5xl lg:text-6xl tracking-tight"
+          />
 
-        <BlurText
-          text="HMPS INF"
-          delay={500}
-          animateBy="words"
-          direction="top"
-          onAnimationComplete={handleAnimationComplete}
-          className="font-display font-extrabold text-white leading-[0.95] text-[15vw] md:text-[9rem] tracking-tight justify-center"
-        />
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="max-w-lg text-[var(--text-secondary)] text-base md:text-lg mt-6 mb-10"
+          >
+            Wadah resmi mahasiswa Informatika UIN Sultan Maulana Hasanuddin
+            Banten untuk mengembangkan potensi, kompetensi akademik,
+            kreativitas, integritas, dan aspirasi.
+          </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-slate-300 text-sm md:text-base tracking-[0.2em] uppercase mt-2 mb-6"
-        >
-          Himpunan Mahasiswa Program Studi Informatika
-        </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex items-center gap-4 flex-wrap"
+          >
+            <MagneticButton
+              as="a"
+              href="/pendaftaran"
+              className="inline-flex items-center gap-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
+            >
+              Gabung HMPS INF →
+            </MagneticButton>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="max-w-xl mx-auto text-slate-300 text-base md:text-lg mb-10"
-        >
-          Wadah resmi mahasiswa Informatika UIN Sultan Maulana Hasanuddin Banten untuk mengembangkan potensi,
-          kompetensi akademik, kreativitas, integritas, dan aspirasi.
-        </motion.p>
+            <MagneticButton
+              as="a"
+              href="#tentang"
+              className="inline-flex items-center gap-2 bg-[var(--surface)] hover:bg-[var(--surface-alt)] border border-[var(--border-subtle)] transition-colors text-[var(--text-primary)] text-sm font-semibold px-6 py-3.5 rounded-full"
+            >
+              Tentang Kami
+            </MagneticButton>
+          </motion.div>
+        </div>
 
+        {/* Kolom kanan — carousel foto pengurus per periode */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="flex items-center justify-center gap-4 flex-wrap"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <MagneticButton as="a"
-            href="/pendaftaran"
-            className="inline-flex items-center gap-2 bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full"
-          >
-            Gabung HMPS INF →
-          </MagneticButton>
-
-          <MagneticButton as="a"
-            href="#tentang"
-            className="inline-flex items-center gap-2 bg-[var(--surface)]/10 hover:bg-[var(--surface)]/20 border border-white/20 transition-colors text-white text-sm font-semibold px-6 py-3.5 rounded-full backdrop-blur-sm"
-          >
-            Tentang Kami
-          </MagneticButton>
+          <PengurusCarousel />
         </motion.div>
       </div>
-
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-slate-300"
-      >
-        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-        <ChevronDown size={16} />
-      </motion.div>
     </section>
   );
 }
