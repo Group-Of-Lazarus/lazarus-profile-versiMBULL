@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, matchPath } from "react-router-dom";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
@@ -14,6 +14,19 @@ import Pendaftaran from "./pages/Pendaftaran";
 import Galeri from "./pages/Galeri";
 import NotFound from "./pages/NotFound";
 
+// Daftar semua path yang benar-benar terdaftar sebagai halaman.
+// Kalau path yang diakses tidak cocok dengan salah satu ini, berarti itu
+// halaman 404 — Navbar & Footer sengaja disembunyikan khusus untuk kondisi ini.
+const knownPaths = [
+  "/",
+  "/aktivitas",
+  "/aktivitas/:slug",
+  "/struktur-organisasi",
+  "/sejarah",
+  "/pendaftaran",
+  "/galeri",
+];
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -24,12 +37,15 @@ function ScrollToTop() {
 
 export default function App() {
   const location = useLocation();
+  const isKnownRoute = knownPaths.some((path) =>
+    matchPath({ path, end: true }, location.pathname)
+  );
 
   return (
     <DesktopGate>
       <div className="min-h-screen flex flex-col">
         <ScrollToTop />
-        <Navbar />
+        {isKnownRoute && <Navbar />}
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -44,7 +60,7 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        <Footer />
+        {isKnownRoute && <Footer />}
       </div>
     </DesktopGate>
   );
