@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import TiltCard from "./TiltCard";
 
 const statusStyle = {
   selesai: "bg-slate-900/70 text-white",
@@ -14,7 +13,6 @@ export default function ActivityCard({ item, index = 0 }) {
   const hasPhoto = Boolean(item.cover) && item.cover.startsWith("/");
 
   return (
-    <TiltCard>
     <Link
       to={`/aktivitas/${item.slug}`}
       className="group block bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border-subtle)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -77,6 +75,5 @@ export default function ActivityCard({ item, index = 0 }) {
         </div>
       </div>
     </Link>
-    </TiltCard>
   );
 }

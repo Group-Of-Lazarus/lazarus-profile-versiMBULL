@@ -66,7 +66,6 @@ export default function Home() {
         </div>
 
         <VisiMisi />
-        <Culture />
       </div>
 
       <ActivityPreview />

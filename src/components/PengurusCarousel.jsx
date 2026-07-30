@@ -15,19 +15,13 @@ const AUTOPLAY_MS = 4500;
 
 const variants = {
   enter: (direction) => ({
-    x: direction > 0 ? 60 : -60,
-    opacity: 0,
-    scale: 0.97,
+    x: direction > 0 ? "100%" : "-100%",
   }),
   center: {
     x: 0,
-    opacity: 1,
-    scale: 1,
   },
   exit: (direction) => ({
-    x: direction > 0 ? -60 : 60,
-    opacity: 0,
-    scale: 0.97,
+    x: direction > 0 ? "-100%" : "100%",
   }),
 };
 
@@ -41,10 +35,11 @@ export default function PengurusCarousel() {
     });
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => paginate(1), AUTOPLAY_MS);
-    return () => clearInterval(timer);
-  }, [paginate]);
+// Uncomment blok di bawah ini kalau mau diaktifkan lagi.
+// useEffect(() => {
+//   const timer = setInterval(() => paginate(1), AUTOPLAY_MS);
+//   return () => clearInterval(timer);
+// }, [paginate]);
 
   const current = periods[index];
 
@@ -56,11 +51,8 @@ export default function PengurusCarousel() {
       <div className="relative bg-[var(--surface)] border border-[var(--border-subtle)] rounded-[2rem] p-3 shadow-2xl">
         {/* Bar kecil ala "device chrome" */}
         <div className="flex items-center gap-2 px-3 pb-3">
-          <span className="w-7 h-7 rounded-full bg-[var(--brand)] grid place-items-center shrink-0">
-            <Users size={13} className="text-white" />
-          </span>
             <span className="text-xs font-medium text-[var(--text-muted)]">
-            Galeri Kepengurusan
+            Pengurus Himpunan
           </span>
         </div>
 

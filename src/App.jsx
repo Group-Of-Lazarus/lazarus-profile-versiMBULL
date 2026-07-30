@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Aktivitas from "./pages/Aktivitas";
 import AktivitasDetail from "./pages/AktivitasDetail";
 import StrukturOrganisasi from "./pages/StrukturOrganisasi";
+import Departemen from "./pages/Departemen";
 import Sejarah from "./pages/Sejarah";
 import Pendaftaran from "./pages/Pendaftaran";
 import Galeri from "./pages/Galeri";
@@ -22,6 +23,7 @@ const knownPaths = [
   "/aktivitas",
   "/aktivitas/:slug",
   "/struktur-organisasi",
+  "/departemen",
   "/sejarah",
   "/pendaftaran",
   "/galeri",
@@ -53,6 +55,7 @@ export default function App() {
               <Route path="/aktivitas" element={<AnimatedPage><Aktivitas /></AnimatedPage>} />
               <Route path="/aktivitas/:slug" element={<AnimatedPage><AktivitasDetail /></AnimatedPage>} />
               <Route path="/struktur-organisasi" element={<AnimatedPage><StrukturOrganisasi /></AnimatedPage>} />
+              <Route path="/departemen" element={<AnimatedPage><Departemen /></AnimatedPage>} />
               <Route path="/sejarah" element={<AnimatedPage><Sejarah /></AnimatedPage>} />
               <Route path="/pendaftaran" element={<AnimatedPage><Pendaftaran /></AnimatedPage>} />
               <Route path="/galeri" element={<AnimatedPage><Galeri /></AnimatedPage>} />

@@ -7,6 +7,7 @@ import {
   MessageSquare,
   Heart,
   Building2,
+  Layers,
   GraduationCap,
   BookOpen,
   Images,
@@ -36,6 +37,7 @@ const aspirasiLinks = [
 // Dropdown "Informasi"
 const informasiLinks = [
   { label: "Struktur Organisasi", to: "/struktur-organisasi", icon: Building2 },
+  { label: "Departemen", to: "/departemen", icon: Layers },
   { label: "Beasiswa", to: "/beasiswa", icon: GraduationCap },
   { label: "Sejarah HMPS", to: "/sejarah", icon: BookOpen },
   { label: "Galeri", to: "/galeri", icon: Images },
