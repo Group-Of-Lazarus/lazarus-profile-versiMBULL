@@ -23,7 +23,7 @@ export default function StrukturOrganisasi() {
   const active = departemenList.find((d) => d.slug === tab);
 
   return (
-    <div className="pt-40 pb-24">
+    <div className="pt-40 pb-24 bg-pattern-grid">
       <Seo
         title="Struktur Organisasi"
         path="/struktur-organisasi"
@@ -52,7 +52,7 @@ export default function StrukturOrganisasi() {
           <div className="max-w-2xl mx-auto">
             {/* Ketua — tengah atas */}
             <div className="flex justify-center">
-              <div className="w-40">
+              <div className="w-48">
                 <Reveal once={false}>
                   <TeamCard {...bph.ketua} jabatan="Ketua Umum" />
                 </Reveal>
@@ -61,22 +61,22 @@ export default function StrukturOrganisasi() {
 
             {/* Connector lines — desktop only */}
             <div className="hidden md:block relative h-12">
-              <div className="absolute left-1/2 top-0 w-px h-6 bg-[var(--border)] -translate-x-1/2" />
-              <div className="absolute left-[12%] right-[12%] top-6 h-px bg-[var(--border)]" />
-              <div className="absolute left-[12%] top-6 w-px h-6 bg-[var(--border)]" />
-              <div className="absolute right-[12%] top-6 w-px h-6 bg-[var(--border)]" />
+            <div className="absolute left-1/2 top-0 w-0.5 h-6 bg-[var(--brand)]/40 -translate-x-1/2" />
+            <div className="absolute left-[12%] right-[12%] top-6 h-0.5 bg-[var(--brand)]/40" />
+            <div className="absolute left-[12%] top-6 w-0.5 h-6 bg-[var(--brand)]/40" />
+            <div className="absolute right-[12%] top-6 w-0.5 h-6 bg-[var(--brand)]/40" />
             </div>
             {/* Mobile spacer */}
             <div className="h-8 md:hidden" />
 
             {/* Sekretaris & Bendahara — menyebar kiri-kanan */}
             <div className="flex flex-col md:flex-row md:justify-between items-center md:items-start gap-8 md:gap-0">
-              <div className="w-40">
+              <div className="w-48">
                 <Reveal once={false} delay={0.1}>
                   <TeamCard {...bph.sekretaris} jabatan="Sekretaris Umum" />
                 </Reveal>
               </div>
-              <div className="w-40">
+              <div className="w-48">
                 <Reveal once={false} delay={0.2}>
                   <TeamCard {...bph.bendahara} jabatan="Bendahara Umum" />
                 </Reveal>
@@ -117,17 +117,29 @@ export default function StrukturOrganisasi() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
+              className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-3xl shadow-sm p-6 md:p-10"
             >
-              <p className="text-sm text-[var(--text-muted)] mb-8">{active.namaLengkap}</p>
+              {/* Header panel: ikon + nama departemen */}
+              <div className="flex items-center gap-4 mb-8 pb-6 border-b border-[var(--border-subtle)]">
+                <span className="w-12 h-12 rounded-2xl bg-[var(--brand-soft)] text-[var(--brand-text)] grid place-items-center shrink-0">
+                  <Building2 size={22} />
+                </span>
+                <div>
+                  <h3 className="font-display font-bold text-xl text-[var(--text-primary)] leading-tight">
+                    {active.nama}
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)]">{active.namaLengkap}</p>
+                </div>
+              </div>
 
               {/* Kepala + Sekretaris Departemen, menyebar kiri-kanan, simetris di tengah */}
               <div className="flex flex-col sm:flex-row sm:justify-around items-center gap-8 sm:gap-4 mb-14 max-w-3xl mx-auto">
-                <div className="w-40">
+                <div className="w-48">
                   <Reveal once={false}>
                     <TeamCard {...active.ketua} jabatan="Kepala Departemen" />
                   </Reveal>
                 </div>
-                <div className="w-40">
+                <div className="w-48">
                   <Reveal once={false} delay={0.1}>
                     <TeamCard {...active.sekretaris} jabatan="Sekretaris Departemen" />
                   </Reveal>
@@ -146,7 +158,7 @@ export default function StrukturOrganisasi() {
                   <div key={ri} className="flex flex-wrap justify-center gap-4">
                     {row.map((a, i) => (
                       <Reveal key={a.nim} once={false} delay={((ri * 4 + i) % 4) * 0.06}>
-                        <div className="w-36">
+                        <div className="w-40">
                           <TeamCard {...a} size="sm" />
                         </div>
                       </Reveal>

@@ -8,56 +8,38 @@ function initials(nama) {
     .toUpperCase();
 }
 
-/**
- * size: "lg" (kepala departemen / ketua umum) | "sm" (anggota)
- */
 export default function TeamCard({ nama, nim, jabatan, foto, size = "lg" }) {
   const isSmall = size === "sm";
 
   return (
-    <div className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-      {/* Photo area: blue background + decorative rings, generated in CSS/SVG */}
+    <div className={`group ${isSmall ? "aspect-[4/5]" : "aspect-[3/4]"}`} style={{ perspective: "1000px" }}>
       <div
-        className={`relative overflow-hidden bg-[var(--brand)] ${
-          isSmall ? "aspect-square" : "aspect-[4/5]"
-        }`}
+        className="relative w-full h-full transition-transform duration-500"
+        style={{ transformStyle: "preserve-3d" }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "rotateY(180deg)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "rotateY(0deg)")}
       >
-        {/* Decorative concentric rings */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-40"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="xMidYMid slice"
+        <div
+          className="absolute inset-0 rounded-2xl bg-[var(--brand)] overflow-hidden flex items-center justify-center"
+          style={{ backfaceVisibility: "hidden" }}
         >
-          <circle cx="50" cy="42" r="42" fill="none" stroke="#ffffff" strokeWidth="1.2" />
-          <circle cx="50" cy="42" r="30" fill="none" stroke="#ffffff" strokeWidth="1.2" />
-          <circle cx="50" cy="42" r="18" fill="none" stroke="#ffffff" strokeWidth="1.2" />
-        </svg>
-
-        {/* Photo (transparent cutout PNG) or initials fallback */}
-        {foto ? (
-          <img
-            src={foto}
-            alt={nama}
-            className="absolute inset-0 w-full h-full object-contain object-bottom"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-end justify-center pb-2">
-            <span className="text-white font-display font-extrabold text-4xl drop-shadow">
+          {foto ? (
+            <img src={foto} alt={nama} className="w-full h-full object-cover" />
+          ) : (
+            <span className={`text-white font-display font-extrabold ${isSmall ? "text-3xl" : "text-5xl"}`}>
               {initials(nama)}
             </span>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Name + role */}
-      <div className={`text-center ${isSmall ? "p-3" : "p-4"}`}>
-        <p className={`font-semibold text-[var(--brand-text)] ${isSmall ? "text-sm" : "text-base"}`}>
-          {nama}
-        </p>
-        {jabatan && (
-          <p className="text-xs text-[var(--text-muted)] mt-0.5 leading-snug">{jabatan}</p>
-        )}
-        <p className="text-[11px] text-[var(--text-faint)] mt-1">NIM · {nim}</p>
+        <div
+          className="absolute inset-0 rounded-2xl bg-[var(--surface)] border border-[var(--border-subtle)] flex flex-col items-center justify-center text-center p-4"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <p className={`font-semibold text-[var(--text-primary)] ${isSmall ? "text-sm" : "text-lg"}`}>{nama}</p>
+          {jabatan && <p className={`text-[var(--text-muted)] mt-1 ${isSmall ? "text-xs" : "text-sm"}`}>{jabatan}</p>}
+          <p className="text-[11px] text-[var(--text-faint)] mt-1">NIM · {nim}</p>
+        </div>
       </div>
     </div>
   );

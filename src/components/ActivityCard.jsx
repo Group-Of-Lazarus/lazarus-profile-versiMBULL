@@ -17,15 +17,15 @@ export default function ActivityCard({ item, index = 0 }) {
       to={`/aktivitas/${item.slug}`}
       className="group block bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border-subtle)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[2.35/1] overflow-hidden">
+      <div className="relative overflow-hidden bg-[var(--surface-alt)]">
         {hasPhoto ? (
           <img
             src={item.cover}
             alt={item.judul}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="block w-full h-auto group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <>
+          <div className="relative aspect-[2.35/1]">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-800 via-blue-600 to-blue-500" />
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white,transparent_40%)]" />
             <div className="absolute inset-0 flex items-center justify-center px-6">
@@ -33,7 +33,7 @@ export default function ActivityCard({ item, index = 0 }) {
                 {item.judul}
               </p>
             </div>
-          </>
+          </div>
         )}
 
         <span

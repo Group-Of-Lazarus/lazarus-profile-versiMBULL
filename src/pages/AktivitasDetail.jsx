@@ -44,13 +44,13 @@ export default function AktivitasDetail() {
         image={hasPhoto ? `https://lazarus-profile-versi-mbull.vercel.app${item.cover}` : undefined}
       />
       {/* Cover — foto polos, tanpa teks besar overlay */}
-      <div className="relative h-[560px] md:h-[550px] overflow-hidden">
-        {hasPhoto ? (
-          <img
-            src={item.cover}
-            alt={item.judul}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+      <div className="relative h-[560px] md:h-[550px] overflow-hidden bg-[var(--surface-alt)]">
+  {hasPhoto ? (
+    <img
+      src={item.cover}
+      alt={item.judul}
+      className="absolute inset-0 w-full h-full object-cover"
+    />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500" />
         )}
