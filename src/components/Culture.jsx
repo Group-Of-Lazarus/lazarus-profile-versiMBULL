@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Reveal from "./Reveal";
-import Eyebrow from "./Eyebrow";
 import { FocusRail } from "./ui/focus-rail";
 import ProkerModal from "./ProkerModal";
 import { departemenList } from "../data/organisasi";
@@ -89,17 +87,6 @@ export default function Culture() {
 
   return (
     <section className="container-hmps pb-24">
-      <Reveal>
-        <Eyebrow>DEPARTEMEN HMPS INFORMATIKA</Eyebrow>
-        <h1 className="font-display font-extrabold text-4xl md:text-5xl mt-5 mb-4 text-[var(--text-primary)] max-w-2xl">
-          Tugas dan <span className="text-[var(--brand-text)]">Fungsi</span> Setiap Departemen
-        </h1>
-        <p className="text-[var(--text-secondary)] max-w-lg mb-14">
-          Kenali peran masing-masing departemen di HMPS Informatika, lengkap
-          dengan program kerja yang sedang dan akan berjalan.
-        </p>
-      </Reveal>
-
       <FocusRail items={departmentItems} onExplore={(item) => setActive(item)} />
 
       <ProkerModal department={active} onClose={() => setActive(null)} />
