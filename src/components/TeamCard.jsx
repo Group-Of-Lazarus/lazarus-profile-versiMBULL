@@ -22,9 +22,9 @@ function detectRole(jabatan = "") {
 
 const roleStyles = {
   ketua: { tone: "bg-[var(--brand)]", icon: Crown },
-  sekretaris: { tone: "bg-indigo-600", icon: FileText },
-  bendahara: { tone: "bg-amber-500", icon: Wallet },
-  anggota: { tone: "bg-slate-500", icon: User },
+  sekretaris: { tone: "bg-[var(--brand)]", icon: FileText },
+  bendahara: { tone: "bg-[var(--brand)]", icon: Wallet },
+  anggota: { tone: "bg-[var(--brand)]", icon: User },
 };
 
 /**
