@@ -40,13 +40,26 @@ src/
 │   ├── Aktivitas.jsx            # List aktivitas + filter dropdown (status & departemen)
 │   ├── AktivitasDetail.jsx      # Detail 1 aktivitas (route /aktivitas/:slug)
 │   ├── StrukturOrganisasi.jsx
-│   ├── Sejarah.jsx
+│   ├── Departemen.jsx
+│   ├── RoadmapMatkul.jsx        # Roadmap mata kuliah semester 1-8 (route /roadmap-matkul)
+│   ├── Beasiswa.jsx             # Info beasiswa buat mahasiswa Informatika (route /beasiswa)
 │   ├── Pendaftaran.jsx
-│   ├── Galeri.jsx
+│   ├── Galeri.jsx                # Album foto per kegiatan + lightbox
+│   ├── layanan/
+│   │   ├── ServiceCenter.jsx     # route /layanan/service-center
+│   │   ├── Marketplace.jsx       # route /layanan/marketplace
+│   │   └── Dosen.jsx             # route /layanan/dosen
 │   └── NotFound.jsx
 ├── data/                        # "Database" sementara — ganti dengan API/CMS asli kalau sudah siap
 │   ├── organisasi.js            # BPH, departemen (nama, slug, anggota, proker)
-│   └── aktivitas/                # Satu file per aktivitas + index.js yang menggabungkan semuanya
+│   ├── beasiswa.js               # Daftar beasiswa + kategori filter
+│   ├── roadmap.js                # Matkul semester 1-8 + kategori (wajib umum/prodi/peminatan/dst)
+│   ├── galeri.js                  # Album foto per kegiatan
+│   ├── dosen.js                   # Data dosen (CONTOH — ganti dengan data asli, lihat komentar di file)
+│   ├── layanan/
+│   │   ├── serviceCenter.js       # Daftar jasa Service Center
+│   │   └── marketplace.js         # Daftar produk Marketplace
+│   └── aktivitas/                 # Satu file per aktivitas + index.js yang menggabungkan semuanya
 │       ├── index.js              # export aktivitasList & filterStatus
 │       └── itcamp.js             # Contoh 1 aktivitas
 ├── lib/

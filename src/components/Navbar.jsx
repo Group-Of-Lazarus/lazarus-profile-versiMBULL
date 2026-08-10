@@ -9,7 +9,7 @@ import {
   Building2,
   Layers,
   GraduationCap,
-  BookOpen,
+  Milestone,
   Images,
   ClipboardList,
   Headset,
@@ -39,7 +39,7 @@ const informasiLinks = [
   { label: "Struktur Organisasi", to: "/struktur-organisasi", icon: Building2 },
   { label: "Departemen", to: "/departemen", icon: Layers },
   { label: "Beasiswa", to: "/beasiswa", icon: GraduationCap },
-  { label: "Sejarah HMPS", to: "/sejarah", icon: BookOpen },
+  { label: "Roadmap Matkul", to: "/roadmap-matkul", icon: Milestone },
   { label: "Galeri", to: "/galeri", icon: Images },
   { label: "Pendaftaran HMPS", to: "/pendaftaran", icon: ClipboardList },
 ];

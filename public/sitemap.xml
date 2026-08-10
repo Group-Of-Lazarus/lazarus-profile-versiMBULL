@@ -22,8 +22,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lazarus-profile-versi-mbull.vercel.app/sejarah</loc>
+    <loc>https://lazarus-profile-versi-mbull.vercel.app/roadmap-matkul</loc>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lazarus-profile-versi-mbull.vercel.app/beasiswa</loc>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lazarus-profile-versi-mbull.vercel.app/pendaftaran</loc>
@@ -31,6 +35,18 @@
   </url>
   <url>
     <loc>https://lazarus-profile-versi-mbull.vercel.app/galeri</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lazarus-profile-versi-mbull.vercel.app/layanan/service-center</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lazarus-profile-versi-mbull.vercel.app/layanan/marketplace</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lazarus-profile-versi-mbull.vercel.app/layanan/dosen</loc>
     <priority>0.6</priority>
   </url>
 </urlset>

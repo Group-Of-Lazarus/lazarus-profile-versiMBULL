@@ -47,7 +47,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li><Link to="/" className="hover:text-white transition-colors">Profil Organisasi</Link></li>
             <li><Link to="/" className="hover:text-white transition-colors">Visi & Misi</Link></li>
-            <li><Link to="/sejarah" className="hover:text-white transition-colors">Sejarah HMPS INF</Link></li>
+            <li><Link to="/roadmap-matkul" className="hover:text-white transition-colors">Roadmap Matkul</Link></li>
           </ul>
         </div>
 
