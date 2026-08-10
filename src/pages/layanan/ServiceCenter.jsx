@@ -1,8 +1,10 @@
-import { Cpu, Code2, Home, Laptop, Mail, Palette, Plug } from "lucide-react";
+import { useState } from "react";
+import { Check, Clock, Copy, Cpu, Code2, Home, Laptop, Mail, Palette, Plug, Tag } from "lucide-react";
 import Seo from "../../components/Seo";
 import Reveal from "../../components/Reveal";
 import PageHero from "../../components/PageHero";
-import ServiceCard from "../../components/ServiceCard";
+import Eyebrow from "../../components/Eyebrow";
+import { StickyScroll } from "../../components/ui/sticky-scroll-reveal";
 import { InstagramIcon } from "../../components/BrandIcons";
 import { serviceList } from "../../data/layanan/serviceCenter";
 
@@ -15,6 +17,8 @@ const EMAIL = "lazarus@uin.ac.id";
 const iconMap = { Laptop, Cpu, Code2, Palette, Plug, Home };
 
 export default function ServiceCenter() {
+  const [copiedSlug, setCopiedSlug] = useState(null);
+
   const handleInquire = async (service) => {
     const text = `Halo HMPS Informatika, saya mau tanya soal layanan "${service.judul}" di Service Center.`;
     try {
@@ -22,8 +26,89 @@ export default function ServiceCenter() {
     } catch {
       // Kalau clipboard API diblok browser, tetep lanjut buka Instagram-nya aja.
     }
+    setCopiedSlug(service.slug);
+    setTimeout(() => setCopiedSlug(null), 2000);
     window.open(INSTAGRAM_URL, "_blank", "noreferrer");
   };
+
+  // Susun data buat StickyScroll: teks + bullet "contoh layanan" di kiri
+  // (scroll biasa), foto + CTA di panel kanan yang sticky.
+  const stickyContent = serviceList.map((service) => {
+    const Icon = iconMap[service.icon];
+    const isCopied = copiedSlug === service.slug;
+
+    return {
+      title: service.judul,
+      description: service.deskripsi,
+      extra: (
+        <div className="space-y-5">
+          <ul className="space-y-2.5">
+            {service.contoh.map((c) => (
+              <li key={c} className="flex items-start gap-2.5 text-sm text-slate-300">
+                <Check size={14} className="mt-0.5 shrink-0 text-blue-400" />
+                {c}
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap gap-2.5">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white/80">
+              <Tag size={12} />
+              {service.estimasi}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white/80">
+              <Clock size={12} />
+              {service.durasi}
+            </span>
+          </div>
+          {/* Fallback CTA — cuma tampil kalau panel sticky di kanan lagi
+              disembunyikan (layar < 1024px), biar tombol pesan tetap ada. */}
+          <button
+            type="button"
+            onClick={() => handleInquire(service)}
+            className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors lg:hidden"
+          >
+            <Copy size={14} />
+            Tanya Layanan Ini
+          </button>
+        </div>
+      ),
+      content: (
+        <div className="relative h-full w-full">
+          <img
+            src={service.gambar}
+            alt={service.judul}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/15 to-slate-950/40" />
+
+          <div className="absolute top-5 left-5 w-11 h-11 rounded-full bg-white/15 backdrop-blur-md grid place-items-center text-white ring-1 ring-white/20">
+            <Icon size={19} strokeWidth={2} />
+          </div>
+
+          <div className="absolute bottom-5 left-5 right-5">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70 mb-2">
+              {service.estimasi}
+            </p>
+            <button
+              type="button"
+              onClick={() => handleInquire(service)}
+              className="w-full inline-flex items-center justify-center gap-2 bg-white text-slate-900 text-sm font-semibold py-2.5 rounded-full hover:bg-white/90 transition-colors"
+            >
+              {isCopied ? (
+                <>
+                  <Check size={15} /> Tersalin, buka Instagram...
+                </>
+              ) : (
+                <>
+                  <Copy size={15} /> Tanya Layanan Ini
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      ),
+    };
+  });
 
   return (
     <div className="pb-24 bg-pattern-grid">
@@ -41,22 +126,20 @@ export default function ServiceCenter() {
 
       <div className="container-hmps pt-14">
         <Reveal className="max-w-2xl mb-10">
-          <p className="text-[var(--text-secondary)] leading-relaxed">
+          <Eyebrow>6 LAYANAN TERSEDIA</Eyebrow>
+          <p className="text-[var(--text-secondary)] leading-relaxed mt-4">
             Service Center adalah unit layanan praktik kerja mahasiswa Informatika, digagas bareng Departemen
             Ekonomi Kreatif. Selain jadi sumber pemasukan mandiri untuk organisasi, ini juga jadi ruang buat
-            pengurus & anggota mengasah skill teknis secara langsung.
+            pengurus & anggota mengasah skill teknis secara langsung. Scroll di dalam kartu berikut buat lihat
+            semua layanan.
           </p>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {serviceList.map((service, i) => (
-            <Reveal key={service.slug} delay={(i % 6) * 0.06}>
-              <ServiceCard service={service} icon={iconMap[service.icon]} onInquire={handleInquire} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={0.1}>
+          <StickyScroll content={stickyContent} />
+        </Reveal>
 
-        <Reveal>
+        <Reveal delay={0.15} className="mt-14">
           <div className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 max-w-3xl">
             <div className="flex-1">
               <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-1">

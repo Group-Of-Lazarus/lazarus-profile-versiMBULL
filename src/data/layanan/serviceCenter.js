@@ -2,6 +2,15 @@
 // Estimasi harga & durasi bersifat INDIKATIF (bukan harga pasti) — sesuaikan
 // dengan kebijakan Service Center HMPS Informatika sebelum dipublikasikan.
 // Field "icon" cocokin ke komponen lucide-react di src/pages/layanan/ServiceCenter.jsx
+//
+// Field "gambar" — CARA GANTI KE FOTO ASLI:
+// 1. Taruh foto dokumentasi layanan (hasil jepretan sendiri/tim) di folder
+//    public/service-center/, kasih nama sesuai slug, contoh:
+//    public/service-center/service-elektronik.jpg
+// 2. Ganti value "gambar" di bawah dari URL Unsplash jadi path lokal,
+//    contoh: gambar: "/service-center/service-elektronik.jpg"
+// Sementara masih pakai foto stok Unsplash (free-to-use, unsplash.com/license)
+// sebagai placeholder sampai foto asli tersedia.
 
 export const serviceList = [
   {
@@ -17,6 +26,7 @@ export const serviceList = [
     ],
     estimasi: "Rp 25.000 - Rp 300.000",
     durasi: "1 - 3 hari kerja",
+    gambar: "https://images.unsplash.com/photo-1721333089073-215a56fd710c?q=80&w=1600&auto=format&fit=crop",
   },
   {
     slug: "upgrade-hardware-software",
@@ -31,6 +41,7 @@ export const serviceList = [
     ],
     estimasi: "Rp 50.000 - Rp 500.000",
     durasi: "1 - 2 hari kerja",
+    gambar: "https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?q=80&w=1600&auto=format&fit=crop",
   },
   {
     slug: "project-maintenance-web-mobile",
@@ -45,6 +56,7 @@ export const serviceList = [
     ],
     estimasi: "Mulai Rp 300.000",
     durasi: "1 - 4 minggu",
+    gambar: "https://images.unsplash.com/photo-1774901128283-64c62117216a?q=80&w=1600&auto=format&fit=crop",
   },
   {
     slug: "desain-ui-ux",
@@ -59,6 +71,7 @@ export const serviceList = [
     ],
     estimasi: "Rp 150.000 - Rp 750.000",
     durasi: "3 - 10 hari kerja",
+    gambar: "https://images.unsplash.com/photo-1658204212985-e0126040f88f?q=80&w=1600&auto=format&fit=crop",
   },
   {
     slug: "service-elektronik-lainnya",
@@ -73,6 +86,7 @@ export const serviceList = [
     ],
     estimasi: "Rp 20.000 - Rp 200.000",
     durasi: "1 - 3 hari kerja",
+    gambar: "https://images.unsplash.com/photo-1620283085439-39620a1e21c4?q=80&w=1600&auto=format&fit=crop",
   },
   {
     slug: "pemasangan-smart-home",
@@ -87,5 +101,6 @@ export const serviceList = [
     ],
     estimasi: "Rp 100.000 - Rp 400.000",
     durasi: "1 hari kerja",
+    gambar: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?q=80&w=1600&auto=format&fit=crop",
   },
 ];

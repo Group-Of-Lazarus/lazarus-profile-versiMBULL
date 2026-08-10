@@ -1,18 +1,28 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "motion/react";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { cn } from "../../lib/utils";
 
-export const StickyScroll = ({
-  content,
-  contentClassName
-}) => {
-  const [activeCard, setActiveCard] = React.useState(0);
+/**
+ * StickyScroll — adaptasi "Sticky Scroll Reveal" dari Aceternity UI.
+ * Beda dari versi aslinya:
+ *  - Import dari "framer-motion" (bukan "motion/react") biar konsisten
+ *    sama seluruh project ini (lihat package.json & komponen lain).
+ *  - `cn` diimport relatif dari src/lib/utils, bukan alias "@/lib/utils".
+ *  - Warna background & gradient bisa di-custom lewat props (default-nya
+ *    dipakein palet brand biru project ini, bukan warna generik demo).
+ *  - Panel sticky dibikin lebih besar (h-80 w-96) + rounded-3xl biar
+ *    konsisten sama radius card lain di project.
+ *
+ * Props:
+ *   content: [{ title, description, content?: JSX, extra?: JSX }]
+ *   backgroundColors?: string[]  — warna solid background container, di-cycle per index
+ *   gradients?: string[]         — CSS gradient buat panel sticky (fallback kalau content kosong)
+ *   contentClassName?: string    — tambahan class buat panel sticky
+ */
+export const StickyScroll = ({ content, contentClassName, backgroundColors, gradients }) => {
+  const [activeCard, setActiveCard] = useState(0);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
-    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
     container: ref,
     offset: ["start start", "end start"],
   });
@@ -30,65 +40,86 @@ export const StickyScroll = ({
     setActiveCard(closestBreakpointIndex);
   });
 
-  const backgroundColors = [
-    "#0f172a", // slate-900
-    "#000000", // black
-    "#171717", // neutral-900
+  // Default on-brand: navy gelap (senada --color-blue-950/900 di index.css)
+  // dan gradient aksen biru — dipakai kalau item content-nya tidak
+  // menyediakan gambar/JSX sendiri.
+  const defaultBackgrounds = ["#0c1530", "#14224c", "#0f172a", "#1c3069", "#111827", "#0b1220"];
+  const defaultGradients = [
+    "linear-gradient(135deg, #2D4FA5, #5580c8)",
+    "linear-gradient(135deg, #0891b2, #2D4FA5)",
+    "linear-gradient(135deg, #4c1d95, #2D4FA5)",
+    "linear-gradient(135deg, #0f766e, #2D4FA5)",
+    "linear-gradient(135deg, #1e3a8a, #3730a3)",
+    "linear-gradient(135deg, #2D4FA5, #0c1530)",
   ];
-  const linearGradients = [
-    "linear-gradient(to bottom right, #06b6d4, #10b981)", // cyan-500 to emerald-500
-    "linear-gradient(to bottom right, #ec4899, #6366f1)", // pink-500 to indigo-500
-    "linear-gradient(to bottom right, #f97316, #eab308)", // orange-500 to yellow-500
-  ];
+  const bgList = backgroundColors?.length ? backgroundColors : defaultBackgrounds;
+  const gradientList = gradients?.length ? gradients : defaultGradients;
 
-  const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0]);
+  const [backgroundGradient, setBackgroundGradient] = useState(gradientList[0]);
 
   useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
+    setBackgroundGradient(gradientList[activeCard % gradientList.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCard]);
 
   return (
     <motion.div
-      animate={{
-        backgroundColor: backgroundColors[activeCard % backgroundColors.length],
-      }}
-      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
-      ref={ref}>
-      <div className="div relative flex items-start px-4">
-        <div className="max-w-2xl">
+      animate={{ backgroundColor: bgList[activeCard % bgList.length] }}
+      transition={{ duration: 0.4 }}
+      className="relative flex h-[36rem] justify-center gap-10 overflow-y-auto rounded-3xl p-6 md:p-10"
+      ref={ref}
+    >
+      <div className="relative flex items-start px-1 md:px-4">
+        <div className="max-w-xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index} className="my-16 first:mt-2 md:my-20 md:first:mt-4">
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                transition={{ duration: 0.3 }}
+                className="mb-3 text-xs font-semibold tracking-wider text-white/50"
+              >
+                {String(index + 1).padStart(2, "0")} / {String(cardLength).padStart(2, "0")}
+              </motion.p>
               <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-2xl font-bold text-slate-100">
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                transition={{ duration: 0.3 }}
+                className="font-display text-2xl font-bold text-white md:text-3xl"
+              >
                 {item.title}
               </motion.h2>
               <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-kg mt-10 max-w-sm text-slate-300">
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                transition={{ duration: 0.3 }}
+                className="mt-4 max-w-md text-sm leading-relaxed text-slate-300 md:text-base"
+              >
                 {item.description}
               </motion.p>
+              {item.extra && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-6"
+                >
+                  {item.extra}
+                </motion.div>
+              )}
             </div>
           ))}
-          <div className="h-40" />
+          <div className="h-24 md:h-32" />
         </div>
       </div>
+
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-6 hidden h-80 w-96 shrink-0 overflow-hidden rounded-3xl shadow-2xl transition-[background] duration-500 lg:block",
           contentClassName
-        )}>
+        )}
+      >
         {content[activeCard].content ?? null}
       </div>
     </motion.div>
