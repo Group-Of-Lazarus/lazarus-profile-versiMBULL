@@ -1,122 +1,134 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  ChevronDown,
-  Menu,
-  X,
-  MessageSquare,
-  Heart,
-  Building2,
-  Layers,
-  GraduationCap,
-  Milestone,
-  Images,
-  ClipboardList,
-  Headset,
-  ShoppingBag,
-  UserRound,
-} from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-// Link langsung tanpa dropdown
+// ─── Keyframe styles injected once ────────────────────────────────────────────
+const STYLE_ID = "navbar-dropdown-anim";
+if (typeof document !== "undefined" && !document.getElementById(STYLE_ID)) {
+  const s = document.createElement("style");
+  s.id = STYLE_ID;
+  s.textContent = `
+    @keyframes nb-panel {
+      0%   { opacity:0; clip-path:inset(0 0 100% 0 round 16px); transform:translateY(-6px); }
+      100% { opacity:1; clip-path:inset(0 0 0%   0 round 16px); transform:translateY(0); }
+    }
+    @keyframes nb-item {
+      0%   { opacity:0; transform:translateX(-10px) skewX(4deg); }
+      60%  { opacity:1; transform:translateX(3px)  skewX(-1deg); }
+      100% { opacity:1; transform:translateX(0)    skewX(0deg);  }
+    }
+    .nb-panel { animation: nb-panel 0.26s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .nb-item  { animation: nb-item  0.26s cubic-bezier(0.22,1,0.36,1) both; }
+  `;
+  document.head.appendChild(s);
+}
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/aktivitas", label: "Kegiatan" },
 ];
 
-// Dropdown "Aspirasi"
 const aspirasiLinks = [
-  { label: "Aspirasi", to: "/aspirasi/form", icon: MessageSquare, status: "ONGOING" },
-  {
-    label: "RAPI (PP)",
-    to: "https://rasa-dppinf-2430da.netlify.app/",
-    icon: Heart,
-    external: true,
-  },
+  { label: "Aspirasi", to: "/aspirasi/form", status: "ONGOING" },
+  { label: "RAPI (PP)", to: "https://rasa-dppinf-2430da.netlify.app/", external: true },
 ];
 
-// Dropdown "Informasi"
 const informasiLinks = [
-  { label: "Struktur Organisasi", to: "/struktur-organisasi", icon: Building2 },
-  { label: "Departemen", to: "/departemen", icon: Layers },
-  { label: "Beasiswa", to: "/beasiswa", icon: GraduationCap },
-  { label: "Roadmap Matkul", to: "/roadmap-matkul", icon: Milestone },
-  { label: "Galeri", to: "/galeri", icon: Images },
-  { label: "Pendaftaran HMPS", to: "/pendaftaran", icon: ClipboardList },
+  { label: "Struktur Organisasi", to: "/struktur-organisasi" },
+  { label: "Departemen", to: "/departemen" },
+  { label: "Beasiswa", to: "/beasiswa" },
+  { label: "Roadmap Matkul", to: "/roadmap-matkul" },
+  { label: "Galeri", to: "/galeri" },
+  { label: "Pendaftaran HMPS", to: "/pendaftaran" },
 ];
 
-// Dropdown "Layanan"
 const layananLinks = [
-  { label: "Service Center", to: "/layanan/service-center", icon: Headset },
-  { label: "Marketplace", to: "/layanan/marketplace", icon: ShoppingBag },
-  { label: "Dosen", to: "/layanan/dosen", icon: UserRound },
+  { label: "Service Center", to: "/layanan/service-center" },
+  { label: "Marketplace", to: "/layanan/marketplace" },
+  { label: "Dosen", to: "/layanan/dosen" },
 ];
 
-// Konfigurasi tiap dropdown di navbar: label tombol + daftar linknya.
-// Halaman yang belum dibuat (mis. Beasiswa, Service Center, dst) otomatis
-// diarahkan ke halaman 404 lewat catch-all route "*" di App.jsx.
 const dropdownMenus = [
-  { key: "aspirasi", label: "Aspirasi", links: aspirasiLinks },
+  { key: "aspirasi",  label: "Aspirasi",  links: aspirasiLinks  },
   { key: "informasi", label: "Informasi", links: informasiLinks },
-  { key: "layanan", label: "Layanan", links: layananLinks },
+  { key: "layanan",   label: "Layanan",   links: layananLinks   },
 ];
 
+// ─── NavDropdown ──────────────────────────────────────────────────────────────
 function NavDropdown({ label, links, openKey, setOpenKey, ownKey }) {
   const isOpen = openKey === ownKey;
+  const ref = useRef(null);
+
+  // Tutup ketika klik di luar
+  useEffect(() => {
+    if (!isOpen) return;
+    function away(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpenKey(null);
+    }
+    document.addEventListener("mousedown", away);
+    return () => document.removeEventListener("mousedown", away);
+  }, [isOpen, setOpenKey]);
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpenKey(ownKey)}
-      onMouseLeave={() => setOpenKey(null)}
-    >
-      <button className="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] transition-colors">
+    <div className="relative" ref={ref}>
+      {/* Trigger — hanya klik, TIDAK ada hover */}
+      <button
+        onClick={() => setOpenKey(isOpen ? null : ownKey)}
+        className="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] transition-colors select-none"
+      >
         {label}
         <ChevronDown
           size={15}
-          className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
-      <div
-        className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 origin-top ${
-          isOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
-        }`}
-      >
-        <div className="bg-[var(--surface)] rounded-2xl shadow-lg border border-[var(--border-subtle)] p-2 w-56">
-          {links.map((item) => {
-            const inner = (
-              <>
-                <span className="w-8 h-8 rounded-lg bg-[var(--brand-soft)] text-[var(--brand-text)] grid place-items-center shrink-0 group-hover:bg-[var(--surface)] transition-colors">
-                  <item.icon size={15} />
-                </span>
-                <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--brand-text)] transition-colors">
-                  {item.label}
-                </span>
-                {item.status && (
-                  <span className="ml-auto text-[9px] font-semibold tracking-wide text-[var(--brand-text)] bg-[var(--brand-soft)] px-2 py-1 rounded-full shrink-0">
-                    {item.status}
-                  </span>
-                )}
-              </>
-            );
-            const className =
-              "flex items-center gap-3 p-2 rounded-lg hover:bg-[var(--brand-soft)] transition-colors group";
 
-            return item.external ? (
-              <a key={item.label} href={item.to} target="_blank" rel="noreferrer" className={className}>
-                {inner}
-              </a>
-            ) : (
-              <Link key={item.label} to={item.to} className={className}>
-                {inner}
-              </Link>
-            );
-          })}
+      {/* Panel — mount/unmount agar animasi selalu fresh */}
+      {isOpen && (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50">
+          <div
+            className="nb-panel bg-[var(--surface)] rounded-2xl shadow-xl border border-[var(--border-subtle)] p-2 w-56"
+            style={{ transformOrigin: "top center" }}
+          >
+            {links.map((item, i) => {
+              const cls =
+                "nb-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[var(--brand-soft)] transition-colors group cursor-pointer";
+              const style = { animationDelay: `${i * 40}ms` };
+
+              const inner = (
+                <>
+                  <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--brand-text)] transition-colors">
+                    {item.label}
+                  </span>
+                  {item.status && (
+                    <span className="ml-auto text-[9px] font-semibold tracking-wide text-[var(--brand-text)] bg-[var(--brand-soft)] px-2 py-1 rounded-full shrink-0">
+                      {item.status}
+                    </span>
+                  )}
+                </>
+              );
+
+              return item.external ? (
+                <a key={item.label} href={item.to} target="_blank" rel="noreferrer"
+                   className={cls} style={style} onClick={() => setOpenKey(null)}>
+                  {inner}
+                </a>
+              ) : (
+                <Link key={item.label} to={item.to}
+                      className={cls} style={style} onClick={() => setOpenKey(null)}>
+                  {inner}
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
 
+// ─── Navbar ───────────────────────────────────────────────────────────────────
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -131,6 +143,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false);
+    setOpenDropdown(null);
   }, [location.pathname]);
 
   return (
@@ -144,17 +157,13 @@ export default function Navbar() {
         style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.6)" }}
       >
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <img
-            src="/logo_hmps.png"
-            alt="Logo HMPS"
-            className="h-10 w-10 object-contain"
-          />
+          <img src="/logo_hmps.png" alt="Logo HMPS" className="h-10 w-10 object-contain" />
           <span className="font-display font-extrabold text-lg tracking-tight text-[var(--text-primary)]">
             HMPS Informatika
           </span>
         </Link>
 
-        {/* Desktop — nav links di tengah */}
+        {/* Desktop */}
         <div className="hidden md:flex flex-1 items-center justify-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -167,7 +176,6 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-
           {dropdownMenus.map((menu) => (
             <NavDropdown
               key={menu.key}
@@ -180,7 +188,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile: tombol menu */}
+        {/* Mobile hamburger */}
         <div className="md:hidden flex items-center gap-2">
           <button
             className="p-2 text-[var(--text-secondary)]"
@@ -192,7 +200,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu — kartu terpisah, muncul di bawah pill navbar */}
+      {/* Mobile drawer */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 mt-3 rounded-3xl bg-white/90 backdrop-blur-xl border border-white/60 shadow-xl ${
           open ? "max-h-[32rem] overflow-y-auto" : "max-h-0 border-transparent shadow-none"
@@ -208,7 +216,6 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-
           {dropdownMenus.map((menu) => (
             <div key={menu.key}>
               <p className="text-[11px] font-semibold tracking-wider text-[var(--text-faint)] uppercase mt-3 mb-1">
@@ -221,18 +228,16 @@ export default function Navbar() {
                     href={item.to}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)]"
+                    className="py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] block"
                   >
-                    <item.icon size={15} className="text-[var(--brand-text)]" />
                     {item.label}
                   </a>
                 ) : (
                   <Link
                     key={item.label}
                     to={item.to}
-                    className="flex items-center gap-2 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)]"
+                    className="py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--brand-text)] block"
                   >
-                    <item.icon size={15} className="text-[var(--brand-text)]" />
                     {item.label}
                   </Link>
                 )

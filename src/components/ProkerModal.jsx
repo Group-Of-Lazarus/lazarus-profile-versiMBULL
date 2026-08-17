@@ -1,176 +1,175 @@
-import { useEffect, useId, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { X, Calendar } from "lucide-react";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { Calendar } from "lucide-react";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  useModal,
+} from "./ui/animated-modal";
 
 /**
- * Modal proker — ala "Expandable Card" Aceternity UI.
- * Kartu proker kecil di list, diklik salah satu -> membesar jadi overlay
- * detail dengan animasi shared-layout (layoutId), bukan modal baru yang
- * muncul mendadak dari tengah.
+ * Komponen inner yang mengontrol state open/close dari luar (programatik).
+ * Harus berada di dalam ModalProvider agar bisa akses useModal().
  */
-export default function ProkerModal({ department, onClose }) {
-  const [selected, setSelected] = useState(null);
-  const uid = useId();
+function ProkerModalInner({ department, onClose }) {
+  const { open, setOpen } = useModal();
 
-  // Reset kartu yang lagi di-expand tiap kali ganti departemen / modal ditutup
+  // Simpan ref department terakhir yang valid agar useEffect penutupan
+  // masih bisa memanggil onClose() meski department sudah di-null-kan
+  const departmentRef = React.useRef(department);
   useEffect(() => {
-    setSelected(null);
+    if (department) departmentRef.current = department;
   }, [department]);
 
+  // Buka modal ketika department di-set dari luar
   useEffect(() => {
-    function onKeyDown(e) {
-      if (e.key !== "Escape") return;
-      if (selected !== null) setSelected(null);
-      else onClose();
+    if (department) {
+      setOpen(true);
     }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selected, onClose]);
+  }, [department, setOpen]);
+
+  // Sync ketika modal ditutup dari dalam (klik overlay / tombol ✕ bawaan)
+  const prevOpenRef = React.useRef(open);
+  useEffect(() => {
+    if (prevOpenRef.current && !open && departmentRef.current) {
+      onClose();
+    }
+    prevOpenRef.current = open;
+  }, [open, onClose]);
 
   const proker = department?.proker ?? [];
 
   return (
-    <AnimatePresence>
-      {department && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 overflow-y-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+    <ModalBody>
+      <ModalContent className="overflow-y-auto">
+        {/* Header: gambar siluet card departemen + overlay gelap */}
+        <div
+          className="relative -mx-8 -mt-8 md:-mx-10 md:-mt-10 mb-6 overflow-hidden"
+          style={{ minHeight: "140px" }}
         >
-          <motion.div
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm"
-            onClick={() => (selected !== null ? setSelected(null) : onClose())}
-          />
+          {/* Gambar latar dari card departemen */}
+          {department?.imageSrc && (
+            <img
+              src={department.imageSrc}
+              alt={department.title}
+              className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+              style={{ filter: "blur(2px) brightness(0.45)" }}
+            />
+          )}
+          {/* Overlay gradient bawah agar fade ke konten */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
 
-          {/* Kartu utama — daftar proker (kondisi "tertutup") */}
-          <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.96 }}
-            transition={{ duration: 0.2 }}
-            className="relative z-10 w-full max-w-lg my-8 rounded-3xl bg-[var(--surface)] shadow-2xl overflow-hidden"
-          >
-            <div
-              className="relative px-6 pt-6 pb-8 text-white"
-              style={{
-                background: `linear-gradient(135deg, ${department.colors[0]}, ${
-                  department.colors[1] ?? department.colors[0]
-                })`,
-              }}
-            >
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Tutup"
-                className="absolute top-5 right-5 w-9 h-9 rounded-full grid place-items-center bg-white/15 hover:bg-white/25 transition-colors"
-              >
-                <X size={18} />
-              </button>
-
-              <department.icon size={26} className="mb-3" strokeWidth={1.75} />
-              <p className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">
-                Program Kerja
-              </p>
-              <h3 className="font-display font-extrabold text-2xl">{department.title}</h3>
-            </div>
-
-            <div className="p-6">
-              {proker.length > 0 ? (
-                <ul className="space-y-3">
-                  {proker.map((p, i) => (
-                    <motion.li
-                      key={i}
-                      layoutId={`proker-${uid}-${i}`}
-                      onClick={() => setSelected(i)}
-                      className="flex items-center justify-between gap-4 bg-[var(--surface-alt)] rounded-2xl px-5 py-4 cursor-pointer hover:bg-[var(--brand-soft)] transition-colors"
-                    >
-                      <motion.span
-                        layoutId={`proker-title-${uid}-${i}`}
-                        className="font-semibold text-[var(--text-primary)]"
-                      >
-                        {p.nama}
-                      </motion.span>
-                      <motion.span
-                        layoutId={`proker-date-${uid}-${i}`}
-                        className="inline-flex items-center gap-1.5 shrink-0 text-xs font-medium text-[var(--text-muted)] bg-[var(--surface)] border border-[var(--border-subtle)] px-3 py-1.5 rounded-full"
-                      >
-                        <Calendar size={13} />
-                        {p.tanggal}
-                      </motion.span>
-                    </motion.li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-sm text-[var(--text-muted)]">
-                  Belum ada proker yang ditambahkan untuk departemen ini.
-                </p>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Kartu proker yang di-expand (kondisi "terbuka") */}
-          <AnimatePresence>
-            {selected !== null && proker[selected] && (
-              <motion.div
-                className="fixed inset-0 z-[110] flex items-center justify-center p-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm"
-                  onClick={() => setSelected(null)}
-                />
-                <motion.div
-                  layoutId={`proker-${uid}-${selected}`}
-                  className="relative z-10 w-full max-w-md rounded-3xl p-8 text-white shadow-2xl"
-                  style={{
-                    background: `linear-gradient(135deg, ${department.colors[0]}, ${
-                      department.colors[1] ?? department.colors[0]
-                    })`,
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelected(null)}
-                    aria-label="Tutup detail"
-                    className="absolute top-5 right-5 w-9 h-9 rounded-full grid place-items-center bg-white/15 hover:bg-white/25 transition-colors"
-                  >
-                    <X size={18} />
-                  </button>
-
-                  <department.icon size={28} className="mb-4" strokeWidth={1.75} />
-                  <motion.h4
-                    layoutId={`proker-title-${uid}-${selected}`}
-                    className="font-display font-extrabold text-2xl mb-4"
-                  >
-                    {proker[selected].nama}
-                  </motion.h4>
-                  <motion.span
-                    layoutId={`proker-date-${uid}-${selected}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium bg-white/15 px-3 py-1.5 rounded-full w-fit"
-                  >
-                    <Calendar size={14} />
-                    {proker[selected].tanggal}
-                  </motion.span>
-
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.15 }}
-                    className="text-white/80 text-sm mt-6 leading-relaxed"
-                  >
-                    Detail lebih lanjut mengenai program kerja ini akan
-                    diinformasikan oleh Departemen {department.title} melalui
-                    media resmi HMPS Informatika.
-                  </motion.p>
-                </motion.div>
-              </motion.div>
+          {/* Konten teks di atas gambar */}
+          <div className="relative z-10 px-8 pt-8 pb-6 md:px-10 md:pt-10">
+            {department?.icon && (
+              <department.icon
+                size={28}
+                className="mb-3 text-white/80"
+                strokeWidth={1.75}
+              />
             )}
-          </AnimatePresence>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/60 mb-1">
+              Program Kerja
+            </p>
+            <h4 className="text-2xl md:text-3xl font-extrabold text-white drop-shadow-md">
+              {department?.title ?? "—"}
+            </h4>
+          </div>
+        </div>
+
+        {/* Gambar proker — maks 5, ukuran besar */}
+        {proker.length > 0 && (
+          <div className="flex justify-center items-center flex-wrap gap-3 mb-6">
+            {proker.slice(0, 5).map((p, idx) => (
+              <motion.div
+                key={"proker-img-" + idx}
+                style={{ rotate: Math.random() * 14 - 7 }}
+                whileHover={{ scale: 1.1, rotate: 0, zIndex: 100 }}
+                whileTap={{ scale: 1.1, rotate: 0, zIndex: 100 }}
+                className="rounded-xl p-1 bg-white dark:bg-neutral-800 dark:border-neutral-700 border border-neutral-100 shrink-0 overflow-hidden"
+              >
+                {p.foto ? (
+                  <img
+                    src={p.foto}
+                    alt={p.nama}
+                    width="160"
+                    height="160"
+                    className="rounded-lg h-28 w-28 md:h-36 md:w-36 object-cover"
+                  />
+                ) : (
+                  /* Placeholder netral dengan inisial nama proker */
+                  <div className="rounded-lg h-28 w-28 md:h-36 md:w-36 flex items-center justify-center text-white text-sm font-bold text-center p-2 bg-slate-700">
+                    {p.nama
+                      .split(" ")
+                      .slice(0, 2)
+                      .map((w) => w[0])
+                      .join("")}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* List program kerja */}
+        <div className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
+            Daftar Program Kerja
+          </p>
+
+          {proker.length > 0 ? (
+            <ul className="space-y-2">
+              {proker.map((p, i) => (
+                <li
+                  key={i}
+                  className="flex items-center gap-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 px-4 py-3"
+                >
+                  {/* Bullet titik kecil */}
+                  <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500" />
+                  <div className="flex-1 min-w-0 flex items-center justify-between gap-3">
+                    <p className="font-semibold text-sm text-neutral-800 dark:text-neutral-100 leading-snug">
+                      {p.nama}
+                    </p>
+                    <span className="inline-flex items-center gap-1 shrink-0 text-xs text-neutral-500 dark:text-neutral-400">
+                      <Calendar size={11} />
+                      {p.tanggal}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 italic">
+              Belum ada program kerja yang ditambahkan untuk departemen ini.
+            </p>
+          )}
+        </div>
+      </ModalContent>
+
+      <ModalFooter className="gap-3">
+        <button
+          onClick={() => setOpen(false)}
+          className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+        >
+          Tutup
+        </button>
+      </ModalFooter>
+    </ModalBody>
+  );
+}
+
+/**
+ * ProkerModal — menggunakan Aceternity UI animated-modal.
+ * Props:
+ *   department: object departemen (dari Culture.jsx) atau null
+ *   onClose: callback ketika modal ditutup
+ */
+export default function ProkerModal({ department, onClose }) {
+  return (
+    <Modal>
+      <ProkerModalInner department={department} onClose={onClose} />
+    </Modal>
   );
 }
